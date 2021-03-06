@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/images/Satu.png')?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/dist/assets/img/Satu.png')?>">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -34,7 +34,7 @@
           <div class="login_inner">
                 <div class="logo text-center">
                     <a href="#">
-                        <img src="<?php echo base_url('assets/images/laci.Jpg')?>" alt="" height="180" weight="150">
+                        <img src="<?php echo base_url('assets/dist/assets/img/laci.Jpg')?>" alt="" height="180" weight="150">
                     </a>
                 </div>
                 <h3><center>ANJAYA</center></h3>
