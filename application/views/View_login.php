@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('asset/images/Satu.png')?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/images/Satu.png')?>">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/bootstrap.min.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/owl.carousel.min.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/magnific-popup.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/font-awesome.min.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/themify-icons.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/nice-select.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/flaticon.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/gijgo.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/animate.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/slicknav.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/style.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('asset/login/css/Pin.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/bootstrap.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/owl.carousel.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/magnific-popup.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/font-awesome.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/themify-icons.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/nice-select.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/flaticon.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/gijgo.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/animate.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/slicknav.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/style.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/login/css/Pin.css')?>">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
           <div class="login_inner">
                 <div class="logo text-center">
                     <a href="#">
-                        <img src="<?php echo base_url('asset/images/laci.Jpg')?>" alt="" height="180" weight="150">
+                        <img src="<?php echo base_url('assets/images/laci.Jpg')?>" alt="" height="180" weight="150">
                     </a>
                 </div>
                 <h3><center>ANJAYA</center></h3>
