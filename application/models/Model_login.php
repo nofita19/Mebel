@@ -2,6 +2,6 @@
  
 class Model_login extends CI_Model{	
 	function cek_login($table,$where){		
-		return $this->db->mebel($table,$where);
+		return $this->db->get_where($table,$where);
 	}	
 }

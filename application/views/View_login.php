@@ -29,7 +29,7 @@
 <body>
 
 	<!-- form itself end-->
-    <form id="test-form" class="limiter" method="post">
+    <form id="test-form" class="limiter" action="<?php echo base_url('Login/aksi_login'); ?>" method="post">
         <div class="loginform">
           <div class="login_inner">
                 <div class="logo text-center">

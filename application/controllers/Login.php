@@ -19,7 +19,7 @@ class Login extends CI_Controller{
             'username' => $username,
             'password' => $password
             );
-        $cek = $this->m_login->cek_login("admin",$where)->num_rows();
+        $cek = $this->Model_login->cek_login("tbl_user",$where)->num_rows();
         if($cek > 0){
      
             $data_session = array(
@@ -29,7 +29,7 @@ class Login extends CI_Controller{
      
             $this->session->set_userdata($data_session);
      
-            redirect(base_url("admin"));
+            redirect(base_url("Home"));
         }else{
             echo "Username dan password salah !";
         }

@@ -1,7 +1,7 @@
 <?php
-class Login extends CI_Controller{
+class Inputbarang extends CI_Controller{
     public function index()
     {
-        $this->load->view('View_login');
+        $this->load->view('View_inputbarang');
     }
 }
