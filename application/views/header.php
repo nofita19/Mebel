@@ -15,7 +15,7 @@ if(!isset($authPage)) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?=$pageTitle;?></title>
+    <title>Anjaya Mebel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="<?=base_url();?>assets/sufee/vendors/bootstrap/dist/css/bootstrap.min.css">
@@ -85,7 +85,7 @@ if(!$authPage) {
                     </li>
                   <h3 class="menu-title">Data Master</h3>
                     <li>
-                        <a href="<?=base_url("services");?>"> <i class="menu-icon fa fa-cogs"></i>Data Barang </a>
+                        <a href="<?=base_url("barang");?>"> <i class="menu-icon fa fa-cogs"></i>Data Barang </a>
                     </li>
                   <h3 class="menu-title">Transaksi</h3>
                     <li>
