@@ -31,20 +31,21 @@ class Barang extends CI_Controller {
 		$this->load->view('footer',$data);
     }
     
-    public function json() {
-        $this->load->model("datatables");
-        $this->datatables->setTable("barang");
-        $this->datatables->setColumn([
+    public function tampil() {
+        $this->load->model("Datatables");
+        $this->Datatables->setTable("barang");
+        $this->Datatables->setColumn([
             '<index>',
-            '<get-name>',
-            '[rupiah=<get-price>]',
-            '<div class="text-center"><button type="button" class="btn btn-primary btn-sm btn-edit" data-id="<get-id>" data-name="<get-name>" data-price="<get-price>"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="<get-id>" data-name="<get-name>"><i class="fa fa-trash"></i></button></div>'
+            '<get-barang_nama>',
+            '[rupiah=<get-harga_tunai>]',
+            '<div class="text-center">
+            <button type="button" class="btn btn-primary btn-sm btn-edit" data-id="<get-barang_kode>" data-name="<get-barang_nama>" data-price="<get-harga_tunai>"><i class="fa fa-edit"></i></button>
+            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="<get-barang_kode>" data-name="<get-barang_nama>"><i class="fa fa-trash"></i></button></div>'
         ]);
-        $this->datatables->setOrdering(["barang_kode","name","price",NULL]);
-        $this->datatables->setWhere("type","service");
-        $this->datatables->setSearchField("name");
-        $this->datatables->generate();
+        // $this->datatables->setOrdering(["barang_kode","barang_nama","harga_tunai",Null]);
+        // $this->datatables->setWhere("type_barang");
+        $this->Datatables->setSearchField("barang_kode");
+        $this->Datatables->generate();
     }
 
     function insert() {

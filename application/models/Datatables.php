@@ -52,27 +52,27 @@ class Datatables extends CI_Model {
             $this->db->select($this->select);
         }
 
-        if($this->join) {
-            foreach($this->join as $join) {
-                $this->db->join($join["table"],$join["on"],$join["type"]);
-            }
-        }
+        // if($this->join) {
+        //     foreach($this->join as $join) {
+        //         $this->db->join($join["table"],$join["on"],$join["type"]);
+        //     }
+        // }
 
 
-        if($_GET['search']['value']) {
-            $this->db->like($this->searchField,$_GET['search']['value']);
-        }
+        // if($_GET['search']['value']) {
+        //     $this->db->like($this->searchField,$_GET['search']['value']);
+        // }
 
-        if(isset($_GET['order'][0]['column'])) {
-            $order_by = $_GET['order'][0]['column'];
-            $this->db->order_by($this->ordering[$order_by],$_GET['order'][0]['dir']);
-        }
+        // if(isset($_GET['order'][0]['column'])) {
+        //     $order_by = $_GET['order'][0]['column'];
+        //     $this->db->order_by($this->ordering[$order_by],$_GET['order'][0]['dir']);
+        // }
 
-        if($this->group) {
-            foreach($this->group as $group) {
-                $this->db->group_by($group);    
-            }
-        }
+        // if($this->group) {
+        //     foreach($this->group as $group) {
+        //         $this->db->group_by($group);    
+        //     }
+        // }
         
     }
 

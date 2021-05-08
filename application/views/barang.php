@@ -2,7 +2,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Barang</h1>
+                        <h1> Data Barang</h1>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                                 <tr>
                                     <th style="width:10%">#</th>
                                     <th>Nama</th>
-                                    <th>Harga</th>
+                                    <th>Harga Tunai</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -101,14 +101,14 @@
                     "serverSide": true,
                     "autoWidth":true,
                     "order": [],
-                    "ajax": {"url": "<?=base_url("barang/json");?>"}
+                    "ajax": {"url": "<?=base_url("barang/tampil");?>"}
                 });
 
 
                 $('.btn-submit').on("click",function(){
                     var form = {
-                        "name": jQuery("input[name=name]").val(),
-                        "price": jQuery("input[name=price]").val()
+                        "barang_nama": jQuery("input[name=barang_nama]").val(),
+                        "harga_tunai": jQuery("input[name=harga_tunai]").val()
                     }
 
                     var action = jQuery("#compose-form").attr("action");
@@ -120,8 +120,8 @@
                         dataType: "json",
                         success: function(data){
                             if(data.status) {
-                                jQuery("input[name=name]").val("");
-                                jQuery("input[name=price]").val("");
+                                jQuery("input[name=barang_nama]").val("");
+                                jQuery("input[name=harga_tunai]").val("");
     
                                 jQuery("#compose").modal('toggle');
                                 jQuery("#data").DataTable().ajax.reload(null,true);
