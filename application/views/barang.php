@@ -21,166 +21,50 @@
         <div class="content mt-3">
             <div class="card">
                 <div class="card-header">
-                    <button class="btn btn-success btn-sm btn-show-add" data-toggle="modal" data-target="#compose"><i class="fa fa-plus"></i> Tambah Barang</button>
+                <a href="<?php echo base_url('barang/tambah') ?>" class="btn btn-success btn-sm btn-show-add">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    <span class="text">Tambah Surat</span>
+                </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="data">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
-                                <tr>
-                                    <th style="width:10%">#</th>
-                                    <th>Nama</th>
-                                    <th>Harga Tunai</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
+							<tr>
+								<th>No</th>
+								<th>Kode</th>
+								<th>Nama Barang</th>
+								<th>Jenis Bahan</th>
+								<th>Type Barang</th>
+								<th>Foto</th>
+								<th style="width: 130px">Aksi</th>
+							</tr>
+						</thead>
+						<tfoot></tfoot>
+                    <tbody>
+                        <?php
+                                $no = 1;
+                                foreach ($barang as $row) {
+                                ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $row['barang_kode'] ?></td>
+                                <td><?= $row['barang_nama'] ?></td>
+                                <td><?= $row['jenis_bahan'] ?></td>
+                                <td><?= $row['type_barang'] ?></td>
+                                <td><img src="<?= base_url('./img/barang/'). $row['foto']; ?>" height="100" width="100"></td>
+                                <td>
+									<a href="<?= base_url() ;?>barang/detail/<?= $row['barang_kode']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+									<a href="<?= base_url() ;?>barang/edit_data/<?= $row['barang_kode']; ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i></a>
+									<a href="<?= base_url() ;?>barang/delete/<?= $row['barang_kode']; ?>" onclick="return confirm('Yakin ingin menghapus produk?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+								</td>
+                            </tr>
+                        <?php } ?> 
+                    </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="modal" id="compose" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="largeModalLabel">Tambah Barang</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" id="compose-form">
-                            <div class="form-group">
-                                <label>Nama Barang</label>
-                                <input type="text" name="name" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Harga Tunai</label>
-                                <input type="number" name="price" class="form-control" id="price" value="0">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary btn-submit">Simpan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="largeModalLabel">Konfirmasi?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary btn-del-confirm">Hapus</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-                $(".btn-show-add").on("click",function(){
-                    jQuery("input[name=name]").val("");
-                    jQuery("input[name=price]").val("");
-                    jQuery("#compose .modal-title").html("Tambah Barang");
-                    jQuery("#compose-form").attr("action","<?=base_url("barang/insert");?>");
-                });
-
-                $("#data").DataTable({
-                    "processing": true,
-                    "serverSide": true,
-                    "autoWidth":true,
-                    "order": [],
-                    "ajax": {"url": "<?=base_url("barang/tampil");?>"}
-                });
-
-
-                $('.btn-submit').on("click",function(){
-                    var form = {
-                        "barang_nama": jQuery("input[name=barang_nama]").val(),
-                        "harga_tunai": jQuery("input[name=harga_tunai]").val()
-                    }
-
-                    var action = jQuery("#compose-form").attr("action");
-
-                    jQuery.ajax({
-                        url: action,
-                        method: "POST",
-                        data: form,
-                        dataType: "json",
-                        success: function(data){
-                            if(data.status) {
-                                jQuery("input[name=barang_nama]").val("");
-                                jQuery("input[name=harga_tunai]").val("");
-    
-                                jQuery("#compose").modal('toggle');
-                                jQuery("#data").DataTable().ajax.reload(null,true);
-                                Swal.fire(
-                                    'Berhasil',
-                                    data.msg,
-                                    'success'
-                                )
-                            } else {
-                                Swal.fire(
-                                    'Gagal',
-                                    data.msg,
-                                    'error'
-                                )
-                            }
-                        }
-                    });
-                });
-
-                $('body').on("click",".btn-delete",function() {
-                    var id = jQuery(this).attr("data-id");
-                    var name = jQuery(this).attr("data-name");
-                    jQuery("#delete .modal-body").html("Anda yakin ingin menghapus <b>"+name+"</b>");
-                    jQuery("#delete").modal("toggle");
-
-                    jQuery("#delete .btn-del-confirm").attr("onclick","deleteData("+id+")");
-                })
-
-                function deleteData(id) {
-                    jQuery.getJSON("<?=base_url();?>barang/delete/"+id,function(data){
-                        if(data.status) {
-                            jQuery("#delete").modal("toggle");
-                            jQuery("#data").DataTable().ajax.reload(null,true);
-                            Swal.fire(
-                                'Berhasil',
-                                data.msg,
-                                'success'
-                            )
-                        } else {
-                            Swal.fire(
-                                'Gagal',
-                                data.msg,
-                                'error'
-                            )
-                        }
-                    })
-                }
-
-                $("body").on("click",".btn-edit",function(){
-                    var id = jQuery(this).attr("data-id");
-                    var name = jQuery(this).attr("data-name");
-                    var price = jQuery(this).attr("data-price");
-
-                    jQuery("#compose .modal-title").html("Edit Barang");
-                    jQuery("#compose-form").attr("action","<?=base_url();?>barang/update/"+id);
-                    jQuery("input[name=name]").val(name);
-                    jQuery("input[name=price]").val(price);
-
-                    jQuery("#compose").modal("toggle");
-                });
-
-        </script>
