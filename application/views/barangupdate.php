@@ -13,48 +13,48 @@
                 <div class="col-lg-6">
                  <div class="form-group">
                     <label>Kode Barang</label>
-                    <input class="form-control" type="text" id="barang_kode" name="barang_kode" value="<?php echo $barang_kode; ?>">
+                    <input class="form-control" type="text" id="barang_kode" name="barang_kode" required value="<?php echo $barang_kode; ?>">
                   </div>
                   <div class="form-group">
                     <label>Nama Barang</label>
-                    <input class="form-control" type="text" id="barang_nama" name="barang_nama" value="<?php echo $barang_nama; ?>">
+                    <input class="form-control" type="text" id="barang_nama" name="barang_nama" required value="<?php echo $barang_nama; ?>">
                   </div>
                   <div class="form-group">
-                    <label>Jenis_barang</label>
-                    <input class="form-control" type="text" id="jenis_bahan" name="jenis_bahan" value="<?php echo $jenis_bahan; ?>">
+                    <label>Jenis Bahan</label>
+                    <input class="form-control" type="text" id="jenis_bahan" name="jenis_bahan" required value="<?php echo $jenis_bahan; ?>">
                   </div>
                   <div class="form-group">
                     <label>Type Barang</label>
-                    <input class="form-control" type="text" id="type_barang" name="type_barang" value="<?php echo $type_barang; ?>">
+                    <input class="form-control" type="text" id="type_barang" name="type_barang" required value="<?php echo $type_barang; ?>">
                   </div>
                   <div class="form-group">
                     <label>Harga Asli</label>
-                    <input class="form-control" type="number" id="harga_asli" name="harga_asli" value="<?php echo $harga_asli; ?>">
+                    <input class="form-control" type="number" id="harga_asli" name="harga_asli" required value="<?php echo $harga_asli; ?>">
                   </div>
                   <div class="form-group">
                     <label>Biaya Produksi</label>
-                    <input class="form-control" type="number" id="biaya_produksi" name="biaya_produksi" value="<?php echo $biaya_produksi; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Biaya Tukang</label>
-                    <input class="form-control" type="number" id="biaya_tukang" name="biaya_tukang" value="<?php echo $biaya_tukang; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Biaya Distribusi</label>
-                    <input class="form-control" type="number" id="biaya_distribusi" name="biaya_distribusi" value="<?php echo $biaya_distribusi; ?>">
+                    <input class="form-control" type="number" id="biaya_produksi" name="biaya_produksi" required value="<?php echo $biaya_produksi; ?>">
                   </div>
                 </div>
                 <!-- /.col-lg-6 nested -->
                 <div class="col-lg-6">
                   <div class="form-group">
+                    <label>Biaya Tukang</label>
+                    <input class="form-control" type="number" id="biaya_tukang" name="biaya_tukang" required value="<?php echo $biaya_tukang; ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Biaya Distribusi</label>
+                    <input class="form-control" type="number" id="biaya_distribusi" name="biaya_distribusi" required value="<?php echo $biaya_distribusi; ?>">
+                  </div>
+                  <div class="form-group">
                     <label>Biaya Lain-Lain</label>
-                    <input class="form-control" type="number" id="biaya_lainlain" name="biaya_lainlain" value="<?php echo $biaya_lainlain; ?>">
+                    <input class="form-control" type="number" id="biaya_lainlain" name="biaya_lainlain" required value="<?php echo $biaya_lainlain; ?>">
                   </div>
                   <div class="form-group">
                     <label>Keuntungan</label>
-                    <input class="form-control" type="number" id="keuntungan" name="keuntungan" value="<?php echo $keuntungan; ?>">
+                    <input class="form-control" type="number" id="keuntungan" name="keuntungan" required value="<?php echo $keuntungan; ?>">
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label>Harga Tunai</label>
                     <input class="form-control" type="number" id="harga_tunai" name="harga_tunai" value="<?php echo $harga_tunai; ?>">
                   </div>
@@ -65,14 +65,14 @@
                   <div class="form-group">
                     <label>Harga Kredit Musiman</label>
                     <input class="form-control" type="number" id="harga_kredit_musiman" name="harga_kredit_musiman" value="<?php echo $harga_kredit_musiman; ?>">
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label>Stok</label>
-                    <input class="form-control" type="number" id="stok" name="stok" value="<?php echo $stok; ?>">
+                    <input class="form-control" type="number" id="stok" name="stok" required value="<?php echo $stok; ?>">
                   </div>
                   <div class="form-group">
                     <label>Foto Barang</label>
-                    <input class="form-control" type="file" id="foto" name="foto" >
+                    <input class="form-control" type="file" id="foto" name="foto" required value="<?php echo $foto; ?>" >
                   </div>
                   <input class="btn btn-info btn-icon-split" type="submit" name="submit" value="Update">
                   <!-- <button type="submit" class="btn btn-info btn-icon-split">

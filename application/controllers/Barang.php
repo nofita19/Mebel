@@ -24,10 +24,10 @@ class Barang extends CI_Controller {
     {
         $data['title'] = "Data Barang";
         $data['User'] = $this->db->get_where('user',['username' => 
-        $this->session->userdata('username')])->row_array(); 
-        $this->load->view("template/sidebar",$data);
+        $this->session->userdata('username')])->row_array();
+        $data['data'] = $this->v->getDetailData('barang' , 'barang_kode' , $id);
         $this->load->view("template/header",$data);
-        $this->load->view('detailbarang',$data);
+        $this->load->view('barangdetail',$data);
         $this->load->view("template/footer");
 		
     }
@@ -61,9 +61,9 @@ class Barang extends CI_Controller {
                 'biaya_distribusi' =>$this->input->post('biaya_distribusi'),
                 'biaya_lainlain' =>$this->input->post('biaya_lainlain'),
                 'keuntungan' =>$this->input->post('keuntungan'),
-                'harga_tunai' =>$this->input->post('harga_tunai'),
-                'harga_kredit_bulananan' =>$this->input->post('harga_kredit_bulananan'),
-                'harga_kredit_musiman' =>$this->input->post('harga_kredit_musiman'),
+                // 'harga_tunai' =>$this->input->post('harga_tunai'),
+                // 'harga_kredit_bulananan' =>$this->input->post('harga_kredit_bulananan'),
+                // 'harga_kredit_musiman' =>$this->input->post('harga_kredit_musiman'),
                 'stok' =>$this->input->post('stok'),
                 'foto' =>$foto
             ));
@@ -90,6 +90,11 @@ class Barang extends CI_Controller {
 
     public function edit_data($barang_kode){
         $this->load->model('v');
+        // $foto = $_FILES['foto']['name'];
+        // $config['allowed_types'] = 'jpg|png|gif|jpeg';
+        // $config['max_size'] = '2048';
+        // $config['upload_path'] = './img/barang/';
+        // $this->load->library('upload' , $config);
         $barang = $this->v->GetWhere('barang', array('barang_kode' => $barang_kode));
         $data = array(
             'barang_kode' => $barang[0]['barang_kode'],
@@ -102,10 +107,11 @@ class Barang extends CI_Controller {
             'biaya_distribusi' => $barang[0]['biaya_distribusi'],
             'biaya_lainlain' => $barang[0]['biaya_lainlain'],
             'keuntungan' => $barang[0]['keuntungan'],
-            'harga_tunai' => $barang[0]['harga_tunai'],
-            'harga_kredit_bulananan' => $barang[0]['harga_kredit_bulananan'],
-            'harga_kredit_musiman' => $barang[0]['harga_kredit_musiman'],
-            'stok' => $barang[0]['stok']
+            // 'harga_tunai' => $barang[0]['harga_tunai'],
+            // 'harga_kredit_bulananan' => $barang[0]['harga_kredit_bulananan'],
+            // 'harga_kredit_musiman' => $barang[0]['harga_kredit_musiman'],
+            'stok' => $barang[0]['stok'],
+            'foto' => $barang[0]['foto']
             );
         $this->load->view("template/header",$data);
         $this->load->view('barangupdate',$data);
@@ -113,6 +119,11 @@ class Barang extends CI_Controller {
     }
 
     public function update_data(){
+        // $foto = $_FILES['foto']['name'];
+        //     $config['allowed_types'] = 'jpg|png|gif|jpeg';
+        //     $config['max_size'] = '2048';
+        //     $config['upload_path'] = './img/barang/';
+        //     $this->load->library('upload' , $config);
         $barang_kode = $_POST['barang_kode'];
         $barang_nama = $_POST['barang_nama'];
         $jenis_bahan = $_POST['jenis_bahan'];
@@ -123,10 +134,11 @@ class Barang extends CI_Controller {
         $biaya_distribusi = $_POST['biaya_distribusi'];
         $biaya_lainlain = $_POST['biaya_lainlain'];
         $keuntungan = $_POST['keuntungan'];
-        $harga_tunai = $_POST['harga_tunai'];
-        $harga_kredit_bulananan = $_POST['harga_kredit_bulananan'];
-        $harga_kredit_musiman = $_POST['harga_kredit_musiman'];
+        // $harga_tunai = $_POST['harga_tunai'];
+        // $harga_kredit_bulananan = $_POST['harga_kredit_bulananan'];
+        // $harga_kredit_musiman = $_POST['harga_kredit_musiman'];
         $stok = $_POST['stok'];
+        $foto = $_POST['foto'];
         $data = array(
             'barang_nama' => $barang_nama,
             'jenis_bahan' => $jenis_bahan,
@@ -137,10 +149,11 @@ class Barang extends CI_Controller {
             'biaya_distribusi' => $biaya_distribusi,
             'biaya_lainlain' => $biaya_lainlain,
             'keuntungan' => $keuntungan,
-            'harga_tunai' => $harga_tunai,
-            'harga_kredit_bulananan' => $harga_kredit_bulananan,
-            'harga_kredit_musiman' => $harga_kredit_musiman,
-            'stok' => $stok
+            // 'harga_tunai' => $harga_tunai,
+            // 'harga_kredit_bulananan' => $harga_kredit_bulananan,
+            // 'harga_kredit_musiman' => $harga_kredit_musiman,
+            'stok' => $stok,
+            'foto' => $foto
          );
         $where = array(
             'barang_kode' => $barang_kode,

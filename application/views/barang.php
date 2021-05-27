@@ -33,7 +33,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
 							<tr>
-								<th>No</th>
+								<th>#</th>
 								<th>Kode</th>
 								<th>Nama Barang</th>
 								<th>Jenis Bahan</th>
@@ -57,7 +57,7 @@
                                 <td><img src="<?= base_url('./img/barang/'). $row['foto']; ?>" height="100" width="100"></td>
                                 <td>
 									<a href="<?= base_url() ;?>barang/detail/<?= $row['barang_kode']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-									<a href="<?= base_url() ;?>barang/edit_data/<?= $row['barang_kode']; ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i></a>
+									<a href="<?= base_url() ;?>barang/edit_data/<?= $row['barang_kode']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
 									<a href="<?= base_url() ;?>barang/delete/<?= $row['barang_kode']; ?>" onclick="return confirm('Yakin ingin menghapus produk?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
 								</td>
                             </tr>
@@ -68,3 +68,10 @@
                 </div>
             </div>
         </div>
+        <script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "lengthMenu": [[5, 10, 15,20, -1], [5, 10, 15,20, "All"]]
+    } );
+} );
+</script>

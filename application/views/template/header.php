@@ -26,44 +26,33 @@ if(!isset($authPage)) {
     <link rel="stylesheet" href="<?=base_url();?>assets/daterangepicker/css/datepicker-bs4.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/pace-style.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/dropify/css/dropify.min.css">
-
+    
+    <link href="<?php echo base_url('asset/tabel/dataTables.bootstrap4.min.css');?>" rel="stylesheet">
 
     <link rel="stylesheet" href="<?=base_url();?>assets/sufee/assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <style>
-      #dataTable_filter input {
-        margin-left: -17px;
-      }
-    </style>
-
 </head>
 
-<body<?php if($authPage) { echo " class='bg-dark'"; } ?>>
-
+<body>
+ <!-- Page level plugins -->
+ 
   <script src="<?=base_url();?>assets/jquery.js"></script>
   <script src="<?=base_url();?>assets/sufee/vendors/popper.js/dist/umd/popper.min.js"></script>
   <script src="<?=base_url();?>assets/sufee/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="<?=base_url();?>assets/sufee/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="<?=base_url();?>assets/sufee/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <!-- <script src="<?=base_url();?>assets/sufee/vendors/datatables.net/js/jquery.dataTables.min.js"></script> -->
+  <!-- <script src="<?=base_url();?>assets/sufee/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script> -->
   <script src="<?=base_url();?>assets/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="<?=base_url();?>assets/daterangepicker/js/datepicker-full.min.js"></script>
   <script src="<?=base_url();?>assets/sufee/vendors/chart.js/dist/Chart.min.js"></script>
   <script src="<?=base_url();?>assets/dropify/js/dropify.min.js"></script>
-  <script>
-      paceOptions = {
-      restartOnRequestAfter: 5,
-      ajax: {
-        trackMethods: ['GET', 'POST', 'PUT', 'DELETE', 'REMOVE']
-      }
-    }
-  </script>
-  <script src="<?=base_url();?>assets/pace.min.js"></script>
+  <script src="<?php echo base_url('assets/tabel/jquery.dataTables.min.js');?>"></script>
+  <script src="<?php echo base_url('assets/tabel/dataTables.bootstrap4.min.js');?>"></script>
 
-<?php
-if(!$authPage) {
-?>
+  <!-- Page level custom scripts -->
+  <script src="<?php echo base_url('assets/tabel/datatables-demo.js');?>"></script>
+
 
     <!-- Left Panel -->
 
@@ -144,4 +133,3 @@ if(!$authPage) {
         </header><!-- /header -->
         <!-- Header-->
 
-<?php } ?>

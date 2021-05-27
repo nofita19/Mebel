@@ -9,6 +9,9 @@ class Model_master extends CI_Model {
       {
         return $query = $this->db->query("SELECT * FROM $tb")->result_array();
       }
+      public function getDetailData($tb , $column , $id){
+        return $query = $this->db->query("SELECT * FROM $tb  WHERE $column = '$id' GROUP BY $column")->result_array();
+      }
     public function GetWhere($table, $data)
       {
         $res=$this->db->get_where($table, $data);
