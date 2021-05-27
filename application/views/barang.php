@@ -25,7 +25,7 @@
                     <span class="icon text-white-50">
                         <i class="fa fa-plus"></i>
                     </span>
-                    <span class="text">Tambah Surat</span>
+                    <span class="text">Tambah Barang</span>
                 </a>
                 </div>
                 <div class="card-body">
