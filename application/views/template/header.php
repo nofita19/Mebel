@@ -78,7 +78,7 @@ if(!isset($authPage)) {
                     </li>
                   <h3 class="menu-title">Transaksi</h3>
                     <li>
-                        <a href="<?=base_url("transaction");?>"> <i class="menu-icon fa fa-plus-square"></i>Transaksi Pembelian</a>
+                        <a href="<?=base_url("pembelian");?>"> <i class="menu-icon fa fa-plus-square"></i>Transaksi Pembelian</a>
                     </li>
                     <li>
                         <a href="<?=base_url("sparepart_sales");?>"> <i class="menu-icon fa fa-list"></i>Transaksi Penjualan</a>
