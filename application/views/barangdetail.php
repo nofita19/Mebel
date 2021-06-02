@@ -29,6 +29,8 @@
             $biayatukang = $d['biaya_tukang'];
             $biayalainlain = $d['biaya_lainlain'];
             $hargatunai = $hargaasli+$biayaproduksi+$biayadisribusi+$biayatukang+$biayalainlain;
+            $hargabulanan = $hargatunai+500000;
+            $hargamusiman = $hargatunai+1000000;
             ?>
                 <div class="card-header">
                 <a href="<?php echo base_url('barang') ?>" class="btn btn-danger btn-sm btn-show-add">
@@ -54,6 +56,9 @@
                             <tr>
                                 <td>Nama Barang</td>
                                 <td>: <?= $d['barang_nama']; ?></td>
+                            </tr><tr>
+                                <td>Jenis Bahan</td>
+                                <td>: <?= $d['jenis_bahan']; ?></td>
                             </tr>
                             <tr>
                                 <td>Type Barang</td>
@@ -89,11 +94,11 @@
                             </tr>
                             <tr>
                                 <td>Harga Kredit Bulananan</td>
-                                <td>: Rp<?= $d['keuntungan']; ?></td>
+                                <td>: Rp<?= $hargabulanan; ?></td>
                             </tr>
                             <tr>
                                 <td>Harga Kredit Musiman</td>
-                                <td>: Rp<?= $d['keuntungan']; ?></td>
+                                <td>: Rp<?= $hargamusiman; ?></td>
                             </tr>
                             <tr>
                                 <td>Stok</td>
