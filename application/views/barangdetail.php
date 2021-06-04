@@ -28,7 +28,8 @@
             $biayadisribusi = $d['biaya_distribusi'];
             $biayatukang = $d['biaya_tukang'];
             $biayalainlain = $d['biaya_lainlain'];
-            $hargatunai = $hargaasli+$biayaproduksi+$biayadisribusi+$biayatukang+$biayalainlain;
+            $keuntungan = $d['keuntungan'];
+            $hargatunai = $hargaasli+$biayaproduksi+$biayadisribusi+$biayatukang+$biayalainlain+$keuntungan;
             $hargabulanan = $hargatunai+500000;
             $hargamusiman = $hargatunai+1000000;
             ?>

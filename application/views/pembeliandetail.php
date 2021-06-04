@@ -22,11 +22,6 @@
             <div class="card">
             
         <?php foreach ($data as $d) {?>
-        <?php 
-            // $hargaasli = $d['harga_asli'];
-            // $biayaproduksi = $d['biaya_produksi'];
-            // $hargatunai = $hargaasli+$biayaproduksi+$biayadisribusi+$biayatukang+$biayalainlain;
-            ?>
                 <div class="card-header">
                 <a href="<?php echo base_url('pembelian') ?>" class="btn btn-danger btn-sm btn-show-add">
                     <span class="icon text-white-50">
@@ -58,20 +53,16 @@
                             </tr>
                             <tr>
                                 <td>Harga</td>
-                                <td>: Rp<?= $d['harga']; ?></td>
+                                <td>: Rp.<?= $d['harga']; ?></td>
                             </tr>
                             <tr>
                                 <td>Jumlah</td>
                                 <td>: <?= $d['jumlah']; ?></td>
                             </tr>
                             <tr>
-                                <td>Sub Total</td>
-                                <td>: Rp<?= $d['sub_total']; ?></td>
+                                <td>Total</td>
+                                <td>: Rp.<?= $d['total']; ?></td>
                             </tr>
-                            <!-- <tr>
-                                <td>Harga Kredit Musiman</td>
-                                <td>: Rp<?= $d['keuntungan']; ?></td>
-                            </tr> -->
                             <tr>
                                 <td>Tanggal</td>
                                 <td>: <?= $d['tanggal']; ?></td>

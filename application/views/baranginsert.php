@@ -34,21 +34,25 @@
                   <div class="form-group">
                     <label>Biaya Produksi</label>
                     <input class="form-control" type="number" id="biaya_produksi" name="biaya_produksi" required>
+                    <small id="priceHelp" class="form-text text-muted">Jika Tidak Ada Biaya Produksi Kolom Diisi Dengan Angka 0.</small>
+                  </div>
+                  <div class="form-group">
+                    <label>Biaya Tukang</label>
+                    <input class="form-control" type="number" id="biaya_tukang" name="biaya_tukang" required>
+                    <small id="priceHelp" class="form-text text-muted">Jika Tidak Ada Biaya Tukang Kolom Diisi Dengan Angka 0.</small>
                   </div>
                 </div>
                 <!-- /.col-lg-6 nested -->
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label>Biaya Tukang</label>
-                    <input class="form-control" type="number" id="biaya_tukang" name="biaya_tukang" required>
-                  </div>
-                  <div class="form-group">
                     <label>Biaya Distribusi</label>
                     <input class="form-control" type="number" id="biaya_distribusi" name="biaya_distribusi" required>
+                    <small id="priceHelp" class="form-text text-muted">Jika Tidak Ada Biaya Distribusi Kolom Diisi Dengan Angka 0.</small>
                   </div>
                   <div class="form-group">
                     <label>Biaya Lain-Lain</label>
                     <input class="form-control" type="number" id="biaya_lainlain" name="biaya_lainlain" required>
+                    <small id="priceHelp" class="form-text text-muted">Jika Tidak Ada Biaya Lain-Lain Kolom Diisi Dengan Angka 0.</small>
                   </div>
                   <div class="form-group">
                     <label>Keuntungan</label>

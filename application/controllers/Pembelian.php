@@ -10,7 +10,6 @@ class Pembelian extends CI_Controller {
     }
     public function index()
     {
-        
         $data['title'] = "Data Pembelian";
         $data['User'] = $this->db->get_where('user',['username' => 
         $this->session->userdata('username')])->row_array();
@@ -34,6 +33,11 @@ class Pembelian extends CI_Controller {
 
     public function tambah(){
         $data['title'] = "Data Pembelian";
+        $dariDB = $this->v->cekkodepembelian();
+        // contoh JRD0004, angka 3 adalah awal pengambilan angka, dan 4 jumlah angka yang diambil
+        $nourut = substr($dariDB, 3, 4);
+        $kodeSekarang = $nourut + 1;
+        $data = array('kode_pembelian' => $kodeSekarang);
         $data['User'] = $this->db->get_where('user',['username' => 
         $this->session->userdata('username')])->row_array(); 
         $this->form_validation->set_rules('kode_pembelian' , 'kode_pembelian' , 'required');
@@ -42,6 +46,9 @@ class Pembelian extends CI_Controller {
             $this->load->view('pembelianinsert',$data);
             $this->load->view("template/footer");
         } else {
+            $harga=$this->input->post('harga');
+            $jumlah=$this->input->post('jumlah');
+            $total=$harga*$jumlah;
             $tambah = $this->v->insert("transaksi_pembelian" , array(
                 'kode_pembelian' =>$this->input->post('kode_pembelian'),
                 'nama_barang' =>$this->input->post('nama_barang'),
@@ -49,7 +56,7 @@ class Pembelian extends CI_Controller {
                 'type_barang' =>$this->input->post('type_barang'),
                 'harga' =>$this->input->post('harga'),
                 'jumlah' =>$this->input->post('jumlah'),
-                'sub_total' =>$this->input->post('sub_total'),
+                'total' =>$total,
                 'tanggal' =>$this->input->post('tanggal')
             ));
 
@@ -68,6 +75,11 @@ class Pembelian extends CI_Controller {
     }
 
     public function edit_data($kode_pembelian){
+        $dariDB = $this->v->cekkodepembelian();
+        // contoh JRD0004, angka 3 adalah awal pengambilan angka, dan 4 jumlah angka yang diambil
+        $nourut = substr($dariDB, 3, 4);
+        $kodeSekarang = $nourut + 1;
+        $data = array('kode_pembelian' => $kodeSekarang);
         $this->load->model('v');
         $pembalian = $this->v->GetWhere('transaksi_pembelian', array('kode_pembelian' => $kode_pembelian));
         $data = array(
@@ -77,7 +89,7 @@ class Pembelian extends CI_Controller {
             'type_barang' => $pembalian[0]['type_barang'],
             'harga' => $pembalian[0]['harga'],
             'jumlah' => $pembalian[0]['jumlah'],
-            'sub_total' => $pembalian[0]['sub_total'],
+            'total' => $pembalian[0]['total'],
             'tanggal' => $pembalian[0]['tanggal']
             );
         $this->load->view("template/header",$data);
@@ -92,7 +104,7 @@ class Pembelian extends CI_Controller {
         $type_barang = $_POST['type_barang'];
         $harga = $_POST['harga'];
         $jumlah = $_POST['jumlah'];
-        $sub_total = $_POST['sub_total'];
+        $total = $_POST['total'];
         $tanggal = $_POST['tanggal'];
 
         $data = array(
@@ -101,7 +113,7 @@ class Pembelian extends CI_Controller {
             'type_barang' => $type_barang,
             'harga' => $harga,
             'jumlah' => $jumlah,
-            'sub_total' => $sub_total,
+            'total' => $total,
             'tanggal' => $tanggal
          );
         $where = array(

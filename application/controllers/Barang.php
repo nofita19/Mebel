@@ -8,6 +8,9 @@ class Barang extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('Model_master', 'v');
     }
+    
+    public $image = "default.jpg";
+
     public function index()
     {
         
@@ -42,14 +45,12 @@ class Barang extends CI_Controller {
             $this->load->view('baranginsert',$data);
             $this->load->view("template/footer");
         } else {
-            $foto = $_FILES['foto']['name'];
-            $config['allowed_types'] = 'jpg|png|gif|jpeg';
-            $config['max_size'] = '2048';
-            $config['upload_path'] = './img/barang/';
-            $this->load->library('upload' , $config);
-
-            if ($this->upload->do_upload('foto')) {
-
+            // $foto = $_FILES['foto']['name'];
+            // $config['allowed_types'] = 'jpg|png|gif|jpeg';
+            // $config['max_size'] = '2048';
+            // $config['upload_path'] = './img/barang/';
+            // $this->load->library('upload' , $config);
+            // if ($this->upload->do_upload('foto')) {
             $tambah = $this->v->insert("barang" , array(
                 'barang_kode' =>$this->input->post('barang_kode'),
                 'barang_nama' =>$this->input->post('barang_nama'),
@@ -65,7 +66,7 @@ class Barang extends CI_Controller {
                 // 'harga_kredit_bulananan' =>$this->input->post('harga_kredit_bulananan'),
                 // 'harga_kredit_musiman' =>$this->input->post('harga_kredit_musiman'),
                 'stok' =>$this->input->post('stok'),
-                'foto' =>$foto
+                'foto' =>$this->_uploadImage()
             ));
 
             if($tambah){
@@ -79,22 +80,17 @@ class Barang extends CI_Controller {
                 </div>');
                 redirect('barang');
             }
-        } else {
-            $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">'
-            . $this->upload->display_errors() .
-            '</div>');
-            redirect('barang');
-        }
+        // } else {
+        //     $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">'
+        //     . $this->upload->display_errors() .
+        //     '</div>');
+        //     redirect('barang');
+        // }
         }
     }
 
     public function edit_data($barang_kode){
         $this->load->model('v');
-        // $foto = $_FILES['foto']['name'];
-        // $config['allowed_types'] = 'jpg|png|gif|jpeg';
-        // $config['max_size'] = '2048';
-        // $config['upload_path'] = './img/barang/';
-        // $this->load->library('upload' , $config);
         $barang = $this->v->GetWhere('barang', array('barang_kode' => $barang_kode));
         $data = array(
             'barang_kode' => $barang[0]['barang_kode'],
@@ -119,11 +115,6 @@ class Barang extends CI_Controller {
     }
 
     public function update_data(){
-        // $foto = $_FILES['foto']['name'];
-        //     $config['allowed_types'] = 'jpg|png|gif|jpeg';
-        //     $config['max_size'] = '2048';
-        //     $config['upload_path'] = './img/barang/';
-        //     $this->load->library('upload' , $config);
         $barang_kode = $_POST['barang_kode'];
         $barang_nama = $_POST['barang_nama'];
         $jenis_bahan = $_POST['jenis_bahan'];
@@ -138,7 +129,11 @@ class Barang extends CI_Controller {
         // $harga_kredit_bulananan = $_POST['harga_kredit_bulananan'];
         // $harga_kredit_musiman = $_POST['harga_kredit_musiman'];
         $stok = $_POST['stok'];
-        $foto = $_POST['foto'];
+        if (!empty($_FILES["foto"]["name"])) {
+            $this->foto =$this->_uploadImage();
+        } else {
+            $this->foto =  $_POST["old_image"];
+		}
         $data = array(
             'barang_nama' => $barang_nama,
             'jenis_bahan' => $jenis_bahan,
@@ -153,7 +148,7 @@ class Barang extends CI_Controller {
             // 'harga_kredit_bulananan' => $harga_kredit_bulananan,
             // 'harga_kredit_musiman' => $harga_kredit_musiman,
             'stok' => $stok,
-            'foto' => $foto
+            // 'foto' => $this->input->post('old_image')
          );
         $where = array(
             'barang_kode' => $barang_kode,
@@ -171,4 +166,23 @@ class Barang extends CI_Controller {
         $this->v->Delete('barang', $barang_kode);
         redirect(base_url('barang'),'refresh');
     }
+
+    private function _uploadImage()
+	{
+		$config['upload_path']          = './img/barang/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['file_name']            = $this->input->post('barang_kode');
+		$config['overwrite']			= true;
+		$config['max_size']             = 1024; // 1MB
+		// $config['max_width']            = 1024;
+		// $config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('foto')) {
+			return $this->upload->data("file_name");
+		}
+		
+		return "default.jpg";
+	}
 }

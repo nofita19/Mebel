@@ -13,7 +13,7 @@
                 <div class="col-lg-6">
                  <div class="form-group">
                     <label>Kode Pembelian</label>
-                    <input class="form-control" type="text" id="kode_pembelian" name="kode_pembelian" required value="<?php echo $kode_pembelian; ?>">
+                    <input class="form-control" type="text" id="kode_pembelian" name="kode_pembelian" readonly value="<?php echo $kode_pembelian; ?>">
                   </div>
                   <div class="form-group">
                     <label>Nama Barang</label>
@@ -39,12 +39,12 @@
                     <input class="form-control" type="number" id="jumlah" name="jumlah" required value="<?php echo $jumlah; ?>">
                   </div>
                   <div class="form-group">
-                    <label>Sub Total</label>
-                    <input class="form-control" type="number" id="sub_total" name="sub_total" required value="<?php echo $sub_total; ?>">
+                    <label>Total</label>
+                    <input class="form-control" type="number" id="total" name="total" readonly value="<?php echo $total; ?>">
                   </div>
                   <div class="form-group">
                     <label>Tanggal Pembelian</label>
-                    <input class="form-control" type="date" id="tanggal" name="tanggal" required value="<?php echo $tanggal; ?>">
+                    <input class="form-control" type="date" id="tanggal" name="tanggal" readonly value="<?php echo $tanggal; ?>">
                   </div>
                   <input class="btn btn-info btn-icon-split" type="submit" name="submit" value="Update">
                   <!-- <button type="submit" class="btn btn-info btn-icon-split">

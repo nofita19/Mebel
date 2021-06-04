@@ -32,4 +32,11 @@ class Model_master extends CI_Model {
       $res = $this->db->update($table, $data, $where); // Kode ini digunakan untuk merubah record yang sudah ada dalam sebuah tabel
       return $res;
       }
+
+      public function cekkodepembelian()
+    {
+        $query = $this->db->query("SELECT MAX(kode_pembelian) as kodepembelian from transaksi_pembelian");
+        $hasil = $query->row();
+        return $hasil->kodepembelian;
+    }
 }

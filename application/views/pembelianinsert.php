@@ -14,7 +14,7 @@
                 <div class="col-lg-6">
                  <div class="form-group">
                     <label>Kode Pembelian</label>
-                    <input class="form-control" type="text" id="kode_pembelian" name="kode_pembelian" required>
+                    <input class="form-control" type="text" id="kode_pembelian" name="kode_pembelian" value="kdp<?php echo sprintf("%04s", $kode_pembelian) ?>" readonly>
                   </div>
                   <div class="form-group">
                     <label>Nama Barang</label>
@@ -38,10 +38,6 @@
                   <div class="form-group">
                     <label>Jumlah</label>
                     <input class="form-control" type="number" id="jumlah" name="jumlah" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Sub Total</label>
-                    <input class="form-control" type="number" id="sub_total" name="sub_total" required>
                   </div>
                   <div class="form-group">
                     <label>Tanggal Pembelian</label>

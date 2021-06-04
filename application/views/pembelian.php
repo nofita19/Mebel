@@ -38,6 +38,7 @@
 								<th>Nama Barang</th>
 								<th>Jenis Barang</th>
 								<th>Type Barang</th>
+								<th>Total Harga</th>
 								<th>Tanggal Pembelian</th>
 								<th style="width: 130px">Aksi</th>
 							</tr>
@@ -54,6 +55,7 @@
                                 <td><?= $row['nama_barang'] ?></td>
                                 <td><?= $row['jenis_barang'] ?></td>
                                 <td><?= $row['type_barang'] ?></td>
+                                <td><?= $row['total'] ?></td>
                                 <td><?= $row['tanggal'] ?></td>
                                 <td>
 									<a href="<?= base_url() ;?>pembelian/detail/<?= $row['kode_pembelian']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>

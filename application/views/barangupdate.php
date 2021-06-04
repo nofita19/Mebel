@@ -72,7 +72,12 @@
                   </div>
                   <div class="form-group">
                     <label>Foto Barang</label>
-                    <input class="form-control" type="file" id="foto" name="foto" required value="<?php echo $foto; ?>" >
+                    <input class="form-control-file <?php echo form_error('foto') ? 'is-invalid':'' ?>" type="file" name="foto" />
+								<input type="hidden" name="old_image" value="<?php echo $foto ?>" />
+								<div class="invalid-feedback">
+									<?php echo form_error('foto') ?>
+								</div>
+                    <!-- <input class="form-control" type="file" id="foto" name="foto" required value="<?php echo $foto; ?>" > -->
                   </div>
                   <input class="btn btn-info btn-icon-split" type="submit" name="submit" value="Update">
                   <!-- <button type="submit" class="btn btn-info btn-icon-split">
