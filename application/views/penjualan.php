@@ -2,7 +2,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1> Data Pembelian</h1>
+                        <h1> Data Penjualan</h1>
                     </div>
                 </div>
             </div>
@@ -11,7 +11,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="<?=base_url("dashboard");?>">Dashboard</a></li>
-                            <li class="active">Pembelian</li>
+                            <li class="active">Penjualan</li>
                         </ol>
                     </div>
                 </div>
@@ -21,11 +21,11 @@
         <div class="content mt-3">
             <div class="card">
                 <div class="card-header">
-                <a href="<?php echo base_url('pembelian/tambah') ?>" class="btn btn-success btn-sm btn-show-add">
+                <a href="<?php echo base_url('penjualan/tambah') ?>" class="btn btn-success btn-sm btn-show-add">
                     <span class="icon text-white-50">
                         <i class="fa fa-plus"></i>
                     </span>
-                    <span class="text">Tambah Pembelian</span>
+                    <span class="text">Tambah Penjualan</span>
                 </a>
                 </div>
                 <div class="card-body">
@@ -38,7 +38,7 @@
 								<th>Nama Barang</th>
 								<th>Jenis Barang</th>
 								<th>Type Barang</th>
-								<th>Tanggal Pembelian</th>
+								<th>Tanggal Penjualan</th>
 								<th style="width: 130px">Aksi</th>
 							</tr>
 						</thead>
@@ -46,19 +46,19 @@
                     <tbody>
                         <?php
                                 $no = 1;
-                                foreach ($pembelian as $row) {
+                                foreach ($penjualan as $row) {
                                 ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $row['kode_pembelian'] ?></td>
-                                <td><?= $row['nama_barang'] ?></td>
-                                <td><?= $row['jenis_barang'] ?></td>
+                                <td><?= $row['nomor_faktur'] ?></td>
+                                <td><?= $row['barang_nama'] ?></td>
+                                <td><?= $row['jenis_bahan'] ?></td>
                                 <td><?= $row['type_barang'] ?></td>
                                 <td><?= $row['tanggal'] ?></td>
                                 <td>
-									<a href="<?= base_url() ;?>pembelian/detail/<?= $row['kode_pembelian']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-									<a href="<?= base_url() ;?>pembelian/edit_data/<?= $row['kode_pembelian']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-									<a href="<?= base_url() ;?>pembelian/delete/<?= $row['kode_pembelian']; ?>" onclick="return confirm('Yakin ingin menghapus Data Pemeblian?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+									<a href="<?= base_url() ;?>penjualan/detail/<?= $row['nomor_faktur']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+									<a href="<?= base_url() ;?>penjualan/edit_data/<?= $row['nomor_faktur']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
+									<a href="<?= base_url() ;?>penjualan/delete/<?= $row['nomor_faktur']; ?>" onclick="return confirm('Yakin ingin menghapus Data Pemeblian?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
 								</td>
                             </tr>
                         <?php } ?> 

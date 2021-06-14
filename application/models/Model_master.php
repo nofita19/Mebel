@@ -9,6 +9,10 @@ class Model_master extends CI_Model {
       {
         return $query = $this->db->query("SELECT * FROM $tb")->result_array();
       }
+      public function getDatapenjualan($tb)
+      {
+        return $query = $this->db->query("SELECT * FROM $tb a join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode")->result_array();
+      }
       public function getDetailData($tb , $column , $id){
         return $query = $this->db->query("SELECT * FROM $tb  WHERE $column = '$id' GROUP BY $column")->result_array();
       }
