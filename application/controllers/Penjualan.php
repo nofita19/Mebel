@@ -37,6 +37,7 @@ class Penjualan extends CI_Controller {
     public function tambah(){
 		$data['title'] = 'Tambah Penjualan';
 		$data['all_barang'] = $this->m_barang->lihat_stok();
+		$data['all_penjualan'] = $this->m_penjualan->lihat();
 		$data['barang'] = $this->v->getData('barang');
 
         $this->load->view("template/header", $data);

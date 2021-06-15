@@ -3,9 +3,9 @@
 		<?= $this->input->post('barang_nama') ?>
 		<input type="hidden" name="nama_barang_hidden[]" value="<?= $this->input->post('barang_nama') ?>">
 	</td>
-	<td class="harga_asli">
-		<?= $this->input->post('harga_asli') ?>
-		<input type="hidden" name="harga_barang_hidden[]" value="<?= $this->input->post('harga_asli') ?>">
+	<td class="harga">
+		<?= $this->input->post('harga') ?>
+		<input type="hidden" name="harga_barang_hidden[]" value="<?= $this->input->post('harga') ?>">
 	</td>
 	<td class="jumlah">
 		<?= $this->input->post('jumlah') ?>

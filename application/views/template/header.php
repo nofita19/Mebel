@@ -70,7 +70,7 @@ if(!isset($authPage)) {
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="<?=base_url("dashboard");?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="<?=base_url("home");?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                   <h3 class="menu-title">Data Master</h3>
                     <li>
