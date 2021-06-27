@@ -52,12 +52,10 @@ if(!isset($authPage)) {
 
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('assets/tabel/datatables-demo.js');?>"></script>
-
-
     <!-- Left Panel -->
 
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
+    <aside id="left-panel" class="left-panel bg-primary">
+        <nav class="navbar navbar-expand-sm bg-primary">
 
             <div class="navbar-header">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +66,7 @@ if(!isset($authPage)) {
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" >
                     <li>
                         <a href="<?=base_url("home");?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
