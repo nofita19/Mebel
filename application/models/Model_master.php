@@ -43,4 +43,41 @@ class Model_master extends CI_Model {
         $hasil = $query->row();
         return $hasil->kodepembelian;
     }
+
+
+    function gettahun()
+    {
+        $query = $this->db->query("SELECT YEAR(tanggal) AS tahun FROM transaksi_pembelian GROUP BY YEAR(tanggal) ORDER BY YEAR(tanggal) ASC");
+        return $query->result();
+    }
+
+    function filterbybulan($tahun1, $bulanawal, $bulanakhir)
+    {
+        $query = $this->db->query("SELECT * from transaksi_pembelian where YEAR(tanggal) = '$tahun1' and MONTH(tanggal) BETWEEN '$bulanawal' and '$bulanakhir' ORDER BY tanggal ASC");
+        return $query->result();
+    }
+
+    function filterbytahun($tahun2)
+    {
+        $query = $this->db->query("SELECT * from transaksi_pembelian where YEAR(tanggal) = '$tahun2' ORDER BY tanggal ASC");
+        return $query->result();
+    }
+
+    function get_graph($month) {
+
+      $count = count($month) - 1;
+      $start_month = $month[0];
+      $end_month = $month[$count];
+
+      if($start_month > $end_month) {
+          $date = (date("Y") - 1)."-".$start_month."-01 00:00:00";
+      } else {
+          $date = date("Y")."-".$start_month."-01 00:00:00";
+      }
+
+      $this->db->select("transaksi_pembelian.*, MONTH(tanggal)");
+      $this->db->group_by("MONTH(tanggal)");
+      return $this->db->get("transaksi_pembelian");
+      
+  }
 }

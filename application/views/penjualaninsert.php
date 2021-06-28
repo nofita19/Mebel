@@ -5,7 +5,7 @@
     <div class="card shadow mb-4">
     <div class="card-header">
     <strong>Isi Form Dibawah Ini!</strong></div>
-							<div class="card-body">
+	<div class="card-body">
 	<form action="<?= base_url('penjualan/proses_tambah') ?>" id="form-tambah" method="POST">
 									<div class="form-row">
 										<div class="form-group col-2">
@@ -37,33 +37,36 @@
 											<label>Type Barang</label>
 											<input type="text" name="type_barang" value="" readonly class="form-control">
 										</div>
-										<div class="form-group col-2">
-											<label>Kode Barang</label>
+										<!-- <div class="form-group col-2">
+											<label>Nama kode</label>
 											<input type="text" name="barang_kode" value="" readonly class="form-control">
-										</div>
+										</div> -->
 										<div class="form-group col-3">
-											<label for="id_jenis_pembayaran">Nama Barang</label>
-											<select name="id_jenis_pembayaran" id="id_jenis_pembayaran" class="form-control">
-											<option value="id_jenis_pembayaran" selected disabled>Pilih Pembayaran</option>
-											<option value="Cash" <?php if (set_value('id_jenis_pembayaran') == "1") : echo "selected";
-																	endif; ?>>Cash</option>
-											<option value="Kredit Bulanan" <?php if (set_value('id_jenis_pembayaran') == "2") : echo "selected";
-																		endif; ?>>Kredit Bulanan</option>
-											<option value="Kredit Musiman" <?php if (set_value('id_jenis_pembayaran') == "3") : echo "selected";
-																	endif; ?>>Kredit Musiman</option>
+											<label for="nama_pembayaran">Pembayaran</label>
+											<select name="nama_pembayaran" id="nama_pembayaran" class="form-control">
+												<option value="">Pilih Pembayaran</option>
+												<?php foreach ($all_pembayaran as $pembayaran): ?>
+													<option value="<?= $pembayaran->nama_pembayaran ?>"><?= $pembayaran->nama_pembayaran ?></option>
+												<?php endforeach ?>
 											</select>
 										</div>
+											<input type="hidden" name="tambah_harga" value="" readonly class="form-control">
+										<div class="form-group col-2">
+											<label>Lama Angsuran </label>
+											<input type="number" name="lama_angsuran" value="" readonly class="form-control">
+										</div>
+											<input type="hidden" name="harga" id="harga" value="" readonly class="form-control">
 										<div class="form-group col-2">
 											<label>Harga </label>
-											<input type="text" name="harga" value="" readonly class="form-control">
+											<input type="number" id="harga2" name="harga2" value="" readonly class="form-control">
 										</div>
 										<div class="form-group col-2">
 											<label>Jumlah</label>
-											<input type="number" name="jumlah" value="" class="form-control" readonly min='1'>
+											<input type="number" id="jumlah" name="jumlah" value="" class="form-control" readonly min='1'>
 										</div>
 										<div class="form-group col-2">
 											<label>Sub Total</label>
-											<input type="number" name="sub_total" value="" class="form-control" readonly>
+											<input type="number" id="sub_total" name="sub_total" value="" class="form-control" readonly>
 										</div>
 										<div class="form-group col-1">
 											<label for="">&nbsp;</label>
@@ -71,16 +74,17 @@
 										</div>
 									</div>
 									<div class="keranjang">
-										<h5>Detail Pembelian</h5>
+										<h5>Detail Penjualan</h5>
 										<hr>
 										<table class="table table-bordered" id="keranjang">
 											<thead>
 												<tr>
-													<td width="35%">Nama Barang</td>
-													<td width="15%">Harga</td>
-													<td width="15%">Jumlah</td>
-													<!-- <td width="10%">Satuan</td> -->
-													<td width="10%">Sub Total</td>
+													<td width="20%">Nama Barang</td>
+													<td width="15%">Jenis Bahan</td>
+													<td width="15%">Type Barang</td>
+													<td width="10%">Harga</td>
+													<td width="10%">Jumlah</td>
+													<td width="15%">Sub Total</td>
 													<td width="15%">Aksi</td>
 												</tr>
 											</thead>
@@ -89,7 +93,7 @@
 											</tbody>
 											<tfoot>
 												<tr>
-													<td colspan="4" align="right"><strong>Total : </strong></td>
+													<td colspan="5" align="right"><strong>Total : </strong></td>
 													<td id="total"></td>
 													
 													<td>
@@ -140,32 +144,65 @@
 							$('input[name="biaya_tukang"]').val(data.biaya_tukang)
 							$('input[name="biaya_lainlain"]').val(data.biaya_lainlain)
 							$('input[name="keuntungan"]').val(data.keuntungan)
-							$('input[name="jumlah"]').val(1)
+							$('input[name="jumlah"]').val(0)
 							$('input[name="max_hidden"]').val(data.stok)
 							$('input[name="jumlah"]').prop('readonly', false)
-							$('button#tambah').prop('disabled', false)
 
 							$('input[name="harga"]').val(parseInt(data.harga_asli) + parseInt(data.biaya_produksi)
 							+ parseInt(data.biaya_distribusi)+ parseInt(data.biaya_tukang)+ parseInt(data.biaya_lainlain)
 							+ parseInt(data.keuntungan)
 							)
-							// $('input[name="harga"]').val($('input[name="harga_asli"]').val() + $('input[name="biaya_produksi"]').val() + $('input[name="biaya_distribusi"]').val() + $('input[name="biaya_tukang"]').val()+ $('input[name="biaya_lainlain"]').val()+ $('input[name="keuntungan"]').val())
-							$('input[name="sub_total"]').val($('input[name="jumlah"]').val() * $('input[name="harga"]').val())
+
+							
+							var hargatotal = parseInt(document.getElementById("harga2").value) * parseInt($('input[name="jumlah"]').val());
+							// $('input[name="sub_total"]').val($('input[name="jumlah"]').val() * total)
+							document.getElementById("sub_total").value = hargatotal;
 
 							$('input[name="jumlah"]').on('keydown keyup change blur', function(){
-							$('input[name="sub_total"]').val($('input[name="jumlah"]').val() * $('input[name="harga"]').val())
+							// $('input[name="sub_total"]').val($('input[name="jumlah"]').val() * $('input[name="harga"]').val())
+							
+							var hargatotal = parseInt(document.getElementById("harga2").value) * parseInt($('input[name="jumlah"]').val());
+							// $('input[name="sub_total"]').val($('input[name="jumlah"]').val() * total)
+							document.getElementById("sub_total").value = hargatotal;
 							})
 						}
 					})
 				}
 			})
 
+			$('#nama_pembayaran').on('change', function(){
+
+			if($(this).val() == '') reset()
+			else {
+				const url_get_all_pembayaran = $('#content').data('url') + '/get_all_pembayaran'
+				$.ajax({
+					url: url_get_all_pembayaran,
+					type: 'POST',
+					dataType: 'json',
+					data: {nama_pembayaran: $(this).val()},
+					success: function(data){
+						
+						$('input[name="tambah_harga"]').val(data.tambah_harga)
+						$('input[name="lama_angsuran"]').val(data.lama_angsuran)
+						$('input[name="harga2"]').val(data.harga2)
+						// $('input[name="harga"]').val(data.harga)
+						// $('input[name="harga2"]').val(parseInt(data.tambah_harga) +  parseInt(data.harga))
+						var hargatotal = parseInt(document.getElementById("harga").value) + parseInt(data.tambah_harga);
+						// alxert(total);
+						document.getElementById("harga2").value = hargatotal;
+						$('button#tambah').prop('disabled', false)
+
+					}
+				})
+			}
+			})
+
 			$(document).on('click', '#tambah', function(e){
 				const url_keranjang_barang = $('#content').data('url') + '/keranjang_barang'
 				const data_keranjang = {
 					barang_nama: $('select[name="barang_nama"]').val(),
-					jenis_bahan: $('select[name="jenis_bahan"]').val(),
-					type_barang: $('select[name="type_barang"]').val(),
+					jenis_bahan: $('input[name="jenis_bahan"]').val(),
+					type_barang: $('input[name="type_barang"]').val(),
 					harga_asli: $('input[name="harga_asli"]').val(),
 					biaya_produksi: $('input[name="biaya_produksi"]').val(),
 					biaya_distribusi: $('input[name="biaya_distribusi"]').val(),
@@ -174,6 +211,7 @@
 					keuntungan: $('input[name="keuntungan"]').val(),
 					jumlah: $('input[name="jumlah"]').val(),
 					harga: $('input[name="harga"]').val(),
+					harga2: $('input[name="harga2"]').val(),
 					sub_total: $('input[name="sub_total"]').val(),
 				}
 
@@ -210,10 +248,10 @@
 
 			$('button[type="submit"]').on('click', function(){
 				$('input[name="barang_kode"]').prop('disabled', true)
+				$('select[name="barang_nama"]').prop('disabled', true)
+				$('input[name="harga2"]').prop('disabled', true)
 				$('input[name="jenis_bahan"]').prop('disabled', true)
 				$('input[name="type_barang"]').prop('disabled', true)
-				$('select[name="barang_nama"]').prop('disabled', true)
-				$('input[name="harga"]').prop('disabled', true)
 				$('input[name="jumlah"]').prop('disabled', true)
 				$('input[name="sub_total"]').prop('disabled', true)
 			})
@@ -228,6 +266,11 @@
 			}
 
 			function reset(){
+				
+				$('#nama_pembayaran').val('')
+				$('input[name="tambah_harga"]').val('')
+				$('input[name="lama_angsuran"]').val('')
+				$('input[name="harga2"]').val('')
 				$('#barang_nama').val('')
 				$('input[name="barang_kode"]').val('')
 				$('input[name="jenis_bahan"]').val('')

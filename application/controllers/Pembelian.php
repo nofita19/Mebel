@@ -132,4 +132,39 @@ class Pembelian extends CI_Controller {
         $this->v->Delete('transaksi_pembelian', $kode_pembelian);
         redirect(base_url('pembelian'),'refresh');
     }
+
+    public function laporanpembelian()
+    {
+        $data['title'] = "Laporan Data Pembelian";
+        $data['tahun'] = $this->v->gettahun();
+        // $data['pembelian'] = $this->v->getDatapenjualan('transaksi_pembelian');
+        $this->load->view("template/header", $data);
+        $this->load->view('report/report_pembelian', $data);
+        $this->load->view("template/footer");
+    }
+
+    public function laporanbybulan()
+    {
+        $data['title'] = "Laporan Dari Bulan";
+        // user data
+
+        $tahun1 = htmlspecialchars($this->input->post('tahun1', true));
+        $bulanawal1 = htmlspecialchars($this->input->post('bulanawal1', true));
+        $bulanakhir = htmlspecialchars($this->input->post('bulanakhir', true));
+
+        $data['bybulan'] = $this->v->filterbybulan($tahun1, $bulanawal1, $bulanakhir);
+        $this->load->view('report/laporan_by_bulan_pembelian', $data);
+    }
+
+    public function laporanbytahun()
+    {
+        $data['title'] = "Laporan Dari Tahun";
+        // user data
+
+        $tahun2 = htmlspecialchars($this->input->post('tahun2', true));
+
+        $data['bytahun'] = $this->v->filterbytahun($tahun2);
+        $this->load->view('report/laporan_by_tahun_pembelian', $data);
+    }
+
 }

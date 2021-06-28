@@ -68,5 +68,54 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Grafik Pembelian
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart1" width="400" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Grafik Penjualan 
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart2" width="400" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+                <script>
+                    var ctx1 = document.getElementById('myChart1').getContext('2d');
+                    // var ctx2 = document.getElementById('myChart2').getContext('2d');
+                    var myChart1 = new Chart(ctx1, {
+                        type: 'line',
+                        data: {
+                            labels: [<?=implode(",",$title);?>],
+                            datasets: [{
+                                label: 'Service',
+                                data: [<?=implode(",",$valuepembelian);?>],
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                borderColor: "rgba(255, 99, 132, 1)",
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    
+                </script>
                

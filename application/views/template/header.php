@@ -83,10 +83,10 @@ if(!isset($authPage)) {
                     </li>
                     <h3 class="menu-title">Laporan</h3>
                     <li>
-                        <a href="<?=base_url("report/sales");?>"> <i class="menu-icon fa fa-bar-chart-o"></i>Laporan Penjualan</a>
+                        <a href="<?=base_url("penjualan/laporanpenjualan");?>"> <i class="menu-icon fa fa-bar-chart-o"></i>Laporan Penjualan</a>
                     </li>
                     <li>
-                        <a href="<?=base_url("report/purchase");?>"> <i class="menu-icon fa fa-bar-chart-o"></i>Laporan Pembelian</a>
+                        <a href="<?=base_url("pembelian/laporanpembelian");?>"> <i class="menu-icon fa fa-bar-chart-o"></i>Laporan Pembelian</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
