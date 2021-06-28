@@ -1,4 +1,5 @@
 <tr class="row-keranjang">
+		<input type="hidden" name="kode_barang_hidden[]" value="<?= $this->input->post('barang_kode') ?>">
 	<td class="barang_nama">
 		<?= $this->input->post('barang_nama') ?>
 		<input type="hidden" name="nama_barang_hidden[]" value="<?= $this->input->post('barang_nama') ?>">
@@ -27,3 +28,5 @@
 		<button type="button" class="btn btn-danger btn-sm" id="tombol-hapus" data-nama-barang="<?= $this->input->post('barang_nama') ?>"><i class="fa fa-trash"></i></button>
 	</td>
 </tr>
+
+

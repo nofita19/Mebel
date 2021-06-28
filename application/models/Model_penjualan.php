@@ -45,13 +45,13 @@ class Model_penjualan extends CI_Model {
 
     function filterbybulan($tahun1, $bulanawal, $bulanakhir)
     {
-        $query = $this->db->query("SELECT * from transaksi_penjualan where YEAR(tanggal) = '$tahun1' and MONTH(tanggal) BETWEEN '$bulanawal' and '$bulanakhir' ORDER BY tanggal ASC");
+        $query = $this->db->query("SELECT a.* ,b.* from transaksi_penjualan  a join barang b on a.barang_kode=b.barang_kode where YEAR(a.tanggal) = '$tahun1' and MONTH(a.tanggal) BETWEEN '$bulanawal' and '$bulanakhir' ORDER BY a.tanggal ASC");
         return $query->result();
     }
 
     function filterbytahun($tahun2)
     {
-        $query = $this->db->query("SELECT * from transaksi_penjualan where YEAR(tanggal) = '$tahun2' ORDER BY tanggal ASC");
+        $query = $this->db->query("SELECT a.* , b.* from transaksi_penjualan  a join barang b on a.barang_kode=b.barang_kode where YEAR(a.tanggal) = '$tahun2' ORDER BY a.tanggal ASC");
         return $query->result();
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 class Model_detail_penjualan extends CI_Model {
-	protected $_table = 'detail_penjualan';
+	protected $_table = 'transaksi_penjualan';
 
 	public function tambah($data){
 		return $this->db->insert_batch($this->_table, $data);

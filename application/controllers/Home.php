@@ -13,8 +13,6 @@ class Home extends CI_Controller{
         $now = date("m");
 
         $before = $now - 5;
-    
-        $arrayTitle = [];
         $arrayNumber = [];
         $arrayValuepembelian = [];
     
@@ -48,9 +46,7 @@ class Home extends CI_Controller{
         
         $data["valuepembelian"] = $arrayValuepembelian;
 
-        $data['title'] = "Data Barang";
-        $data['User'] = $this->db->get_where('user',['username' => 
-        $this->session->userdata('username')])->row_array();
+        $data['title'] = "Grafik Data";
         $this->load->view('template/header',$data);
         $this->load->view('dashboard',$data);
         $this->load->view('template/footer',$data);

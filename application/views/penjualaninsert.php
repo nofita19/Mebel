@@ -37,10 +37,7 @@
 											<label>Type Barang</label>
 											<input type="text" name="type_barang" value="" readonly class="form-control">
 										</div>
-										<!-- <div class="form-group col-2">
-											<label>Nama kode</label>
-											<input type="text" name="barang_kode" value="" readonly class="form-control">
-										</div> -->
+											<input type="hidden" name="barang_kode" value="" readonly class="form-control">
 										<div class="form-group col-3">
 											<label for="nama_pembayaran">Pembayaran</label>
 											<select name="nama_pembayaran" id="nama_pembayaran" class="form-control">
@@ -89,7 +86,22 @@
 												</tr>
 											</thead>
 											<tbody>
-												
+											</tbody>
+										</table>
+									</div>
+									
+
+									<table class="table table-bordered" id="bayar">
+											<thead>
+												<tr>
+													<td width="10%">Nama Pembeli</td>
+													<td width="30%">Alamat Pembeli</td>
+													<td width="10%">No Telpon</td>
+													<td width="15%">Foto KTP</td>
+													<td width="15%">DP</td>
+												</tr>
+											</thead>
+											<tbody>
 											</tbody>
 											<tfoot>
 												<tr>
@@ -104,7 +116,6 @@
 												</tr>
 											</tfoot>
 										</table>
-									</div>
 								</form>
 							</div>	
     </div>
@@ -201,6 +212,7 @@
 				const url_keranjang_barang = $('#content').data('url') + '/keranjang_barang'
 				const data_keranjang = {
 					barang_nama: $('select[name="barang_nama"]').val(),
+					barang_kode: $('input[name="barang_kode"]').val(),
 					jenis_bahan: $('input[name="jenis_bahan"]').val(),
 					type_barang: $('input[name="type_barang"]').val(),
 					harga_asli: $('input[name="harga_asli"]').val(),
@@ -247,8 +259,8 @@
 			})
 
 			$('button[type="submit"]').on('click', function(){
-				$('input[name="barang_kode"]').prop('disabled', true)
 				$('select[name="barang_nama"]').prop('disabled', true)
+				$('input[name="barang_kode"]').prop('disabled', true)
 				$('input[name="harga2"]').prop('disabled', true)
 				$('input[name="jenis_bahan"]').prop('disabled', true)
 				$('input[name="type_barang"]').prop('disabled', true)

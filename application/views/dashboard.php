@@ -75,6 +75,9 @@
                             Grafik Pembelian
                         </div>
                         <div class="card-body">
+                        <!-- <?php
+            var_dump($valuepembelian);
+                        ?> -->
                             <canvas id="myChart1" width="400" height="100"></canvas>
                         </div>
                     </div>
@@ -85,7 +88,7 @@
                             Grafik Penjualan 
                         </div>
                         <div class="card-body">
-                            <canvas id="myChart2" width="400" height="100"></canvas>
+                            <!-- <canvas id="myChart2" width="400" height="100"></canvas> -->
                         </div>
                     </div>
                 </div>

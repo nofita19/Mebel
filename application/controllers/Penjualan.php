@@ -99,54 +99,6 @@ class Penjualan extends CI_Controller {
 		$this->load->view('keranjang');
 	}
 
-
-    // public function edit_data($nomor_faktur){
-    //     $this->load->model('v');
-    //     $pembalian = $this->v->GetWhere('transaksi_penjualan', array('nomor_faktur' => $nomor_faktur));
-    //     $data = array(
-    //         'nomor_faktur' => $pembalian[0]['nomor_faktur'],
-    //         'nama_barang' => $pembalian[0]['nama_barang'],
-    //         'jenis_barang' => $pembalian[0]['jenis_barang'],
-    //         'type_barang' => $pembalian[0]['type_barang'],
-    //         'harga' => $pembalian[0]['harga'],
-    //         'jumlah' => $pembalian[0]['jumlah'],
-    //         'sub_total' => $pembalian[0]['sub_total'],
-    //         'tanggal' => $pembalian[0]['tanggal']
-    //         );
-    //     $this->load->view("template/header",$data);
-    //     $this->load->view('penjualanupdate',$data);
-    //     $this->load->view("template/footer");
-    // }
-
-    // public function update_data(){
-    //     $nomor_faktur = $_POST['nomor_faktur'];
-    //     $nama_barang = $_POST['nama_barang'];
-    //     $jenis_barang = $_POST['jenis_barang'];
-    //     $type_barang = $_POST['type_barang'];
-    //     $harga = $_POST['harga'];
-    //     $jumlah = $_POST['jumlah'];
-    //     $sub_total = $_POST['sub_total'];
-    //     $tanggal = $_POST['tanggal'];
-
-    //     $data = array(
-    //         'nama_barang' => $nama_barang,
-    //         'jenis_barang' => $jenis_barang,
-    //         'type_barang' => $type_barang,
-    //         'harga' => $harga,
-    //         'jumlah' => $jumlah,
-    //         'sub_total' => $sub_total,
-    //         'tanggal' => $tanggal
-    //      );
-    //     $where = array(
-    //         'nomor_faktur' => $nomor_faktur,
-    //     );
-    //     $this->load->model('v');
-    //     $res = $this->v->Update('transaksi_penjualan', $data, $where);
-    //     if ($res>0) {
-    //         redirect('penjualan','refresh');
-    //     }
-    // }
-
     public function delete($nomor_faktur){
         $nomor_faktur = array('nomor_faktur' => $nomor_faktur);
         $this->load->model('v');
