@@ -58,7 +58,7 @@
                                 <td>Nama Barang</td>
                                 <td>: <?= $d['barang_nama']; ?></td>
                             </tr><tr>
-                                <td>Jenis Bahan</td>
+                                <td>Jenis Barang</td>
                                 <td>: <?= $d['jenis_bahan']; ?></td>
                             </tr>
                             <tr>

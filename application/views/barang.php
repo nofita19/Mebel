@@ -36,7 +36,7 @@
 								<th>#</th>
 								<th>Kode</th>
 								<th>Nama Barang</th>
-								<th>Jenis Bahan</th>
+								<th>Jenis Barang</th>
 								<th>Type Barang</th>
 								<th>Foto</th>
 								<th style="width: 130px">Aksi</th>

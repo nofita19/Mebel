@@ -20,7 +20,7 @@
                     <input class="form-control" type="text" id="barang_nama" name="barang_nama" required value="<?php echo $barang_nama; ?>">
                   </div>
                   <div class="form-group">
-                    <label>Jenis Bahan</label>
+                    <label>Jenis Barang</label>
                     <input class="form-control" type="text" id="jenis_bahan" name="jenis_bahan" required value="<?php echo $jenis_bahan; ?>">
                   </div>
                   <div class="form-group">
