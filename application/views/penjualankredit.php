@@ -14,21 +14,22 @@
 										</div>
 										<div class="form-group col-2">
 											<label>Tanggal Penjualan</label>
-											<input type="text" name="tanggal" value="<?= date('d/m/Y') ?>" readonly class="form-control">
+											<input type="text" name="tanggal" value="<?= date('Y/m/d') ?>" readonly class="form-control">
 										</div>
 									</div>
 									<h5>Data Barang</h5>
 									<hr>
 									<div class="form-row">
 										<div class="form-group col-3">
-											<label for="barang_nama">Nama Barang</label>
-											<select name="barang_nama" id="barang_nama" class="form-control">
+											<label for="barang_kode">Nama Barang</label>
+											<select name="barang_kode" id="barang_kode" class="form-control">
 												<option value="">Pilih Barang</option>
 												<?php foreach ($all_barang as $barang): ?>
-													<option value="<?= $barang->barang_nama ?>"><?= $barang->barang_nama ?></option>
+													<option value="<?= $barang->barang_kode ?>"><?= $barang->barang_nama ?></option>
 												<?php endforeach ?>
 											</select>
 										</div>
+											<input type="hidden" name="barang_nama" value="" readonly class="form-control">
 										<div class="form-group col-2">
 											<label>Jenis Bahan</label>
 											<input type="text" name="jenis_bahan" value="" readonly class="form-control">
@@ -39,11 +40,11 @@
 										</div>
 											<input type="hidden" name="barang_kode" value="" readonly class="form-control">
 										<div class="form-group col-3">
-											<label for="nama_pembayaran">Pembayaran</label>
-											<select name="nama_pembayaran" id="nama_pembayaran" class="form-control">
+											<label for="id_jenis_pembayaran">Pembayaran</label>
+											<select name="id_jenis_pembayaran" id="id_jenis_pembayaran" class="form-control">
 												<option value="">Pilih Pembayaran</option>
 												<?php foreach ($all_pembayaran as $pembayaran): ?>
-													<option value="<?= $pembayaran->nama_pembayaran ?>"><?= $pembayaran->nama_pembayaran ?></option>
+													<option value="<?= $pembayaran->id_jenis_pembayaran ?>"><?= $pembayaran->nama_pembayaran ?></option>
 												<?php endforeach ?>
 											</select>
 										</div>
@@ -78,19 +79,17 @@
 												<tr>
 													<td width="20%">Nama Barang</td>
 													<td width="15%">Jenis Bahan</td>
-													<td width="15%">Type Barang</td>
-													<td width="10%">Harga</td>
-													<td width="10%">Jumlah</td>
-													<td width="15%">Sub Total</td>
-													<td width="15%">Aksi</td>
+													<td width="16%">Type Barang</td>
+													<td width="15%">Harga</td>
+													<td width="15%">Jumlah</td>
+													<td width="9%">Sub Total</td>
+													<td width="10%">Aksi</td>
 												</tr>
 											</thead>
 											<tbody>
 											</tbody>
 										</table>
 									</div>
-									
-
 									<table class="table table-bordered" id="bayar">
 											<thead>
 												<tr>
@@ -98,17 +97,19 @@
 													<td width="30%">Alamat Pembeli</td>
 													<td width="10%">No Telpon</td>
 													<td width="15%">Foto KTP</td>
-													<td width="15%">DP</td>
+													<td width="20%">Bayar</td>
 												</tr>
 											</thead>
 											<tbody>
+											
 											</tbody>
 											<tfoot>
 												<tr>
-													<td colspan="5" align="right"><strong>Total : </strong></td>
+													<td colspan="4" align="right"><strong>Total : </strong></td>
 													<td id="total"></td>
-													
-													<td>
+												</tr>
+												<tr>
+												<td colspan="5" align="right">
 														<input type="hidden" name="total_hidden" value="">
 														<input type="hidden" name="max_hidden" value="">
 														<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
@@ -136,7 +137,7 @@
 			   	}
 			})
 
-			$('#barang_nama').on('change', function(){
+			$('#barang_kode').on('change', function(){
 
 				if($(this).val() == '') reset()
 				else {
@@ -145,9 +146,9 @@
 						url: url_get_all_barang,
 						type: 'POST',
 						dataType: 'json',
-						data: {barang_nama: $(this).val()},
+						data: {barang_kode: $(this).val()},
 						success: function(data){
-							$('input[name="barang_kode"]').val(data.barang_kode)
+							$('input[name="barang_nama"]').val(data.barang_nama)
 							$('input[name="jenis_bahan"]').val(data.jenis_bahan)
 							$('input[name="type_barang"]').val(data.type_barang)
 							$('input[name="biaya_produksi"]').val(data.biaya_produksi)
@@ -181,7 +182,7 @@
 				}
 			})
 
-			$('#nama_pembayaran').on('change', function(){
+			$('#id_jenis_pembayaran').on('change', function(){
 
 			if($(this).val() == '') reset()
 			else {
@@ -190,7 +191,7 @@
 					url: url_get_all_pembayaran,
 					type: 'POST',
 					dataType: 'json',
-					data: {nama_pembayaran: $(this).val()},
+					data: {id_jenis_pembayaran: $(this).val()},
 					success: function(data){
 						
 						$('input[name="tambah_harga"]').val(data.tambah_harga)
@@ -208,11 +209,13 @@
 			}
 			})
 
+			//keranjang
 			$(document).on('click', '#tambah', function(e){
 				const url_keranjang_barang = $('#content').data('url') + '/keranjang_barang'
 				const data_keranjang = {
-					barang_nama: $('select[name="barang_nama"]').val(),
-					barang_kode: $('input[name="barang_kode"]').val(),
+					barang_kode: $('select[name="barang_kode"]').val(),
+					id_jenis_pembayaran: $('select[name="id_jenis_pembayaran"]').val(),
+					barang_nama: $('input[name="barang_nama"]').val(),
 					jenis_bahan: $('input[name="jenis_bahan"]').val(),
 					type_barang: $('input[name="type_barang"]').val(),
 					harga_asli: $('input[name="harga_asli"]').val(),
@@ -235,7 +238,7 @@
 						type: 'POST',
 						data: data_keranjang,
 						success: function(data){
-							if($('select[name="barang_nama"]').val() == data_keranjang.nama_barang) $('option[value="' + data_keranjang.nama_barang + '"]').hide()
+							if($('select[name="barang_kode"]').val() == data_keranjang.nama_barang) $('option[value="' + data_keranjang.nama_barang + '"]').hide()
 							reset()
 
 							$('table#keranjang tbody').append(data)
@@ -249,9 +252,41 @@
 
 			})
 
+			//id bayar
+			$(document).ready(function(e){
+				const url_bayar_barang = $('#content').data('url') + '/bayar_barang'
+				const data_bayar = {
+					barang_kode: $('select[name="barang_kode"]').val(),
+					id_jenis_pembayaran: $('select[name="id_jenis_pembayaran"]').val(),
+					nama_pembeli: $('input[name="nama_pembeli"]').val(),
+					alamat_pembeli: $('input[name="alamat_pembeli"]').val(),
+					no_telp: $('input[name="no_telp"]').val(),
+					foto_ktp: $('input[name="foto_ktp"]').val(),
+					dp: $('input[name="dp"]').val(),
+				}
+					$.ajax({
+						url: url_bayar_barang,
+						type: 'POST',
+						data: data_bayar,
+						success: function(data){
+							if($('select[name="barang_kode"]').val() == data_bayar.id_jenis_pembayaran) $('option[value="' + data_bayar.id_jenis_pembayaran + '"]').hide()
+							reset()
+							$('table#bayar tbody').append(data)
+							$('tfoot').show()
+
+							// $('#total').html('<strong>' + hitung_total() + '</strong>')
+							// $('input[name="total_hidden"]').val(hitung_total())
+						}
+					})
+
+			})
+
 
 			$(document).on('click', '#tombol-hapus', function(){
 				$(this).closest('.row-keranjang').remove()
+				
+				$('#total').html('<strong>' + hitung_total() + '</strong>')
+				$('input[name="total_hidden"]').val(hitung_total())
 
 				$('option[value="' + $(this).data('nama-barang') + '"]').show()
 
@@ -259,8 +294,9 @@
 			})
 
 			$('button[type="submit"]').on('click', function(){
-				$('select[name="barang_nama"]').prop('disabled', true)
-				$('input[name="barang_kode"]').prop('disabled', true)
+				$('select[name="barang_kode"]').prop('disabled', true)
+				$('select[name="id_jenis_pembayaran"]').prop('disabled', true)
+				// $('input[name="barang_kode"]').prop('disabled', true)
 				$('input[name="harga2"]').prop('disabled', true)
 				$('input[name="jenis_bahan"]').prop('disabled', true)
 				$('input[name="type_barang"]').prop('disabled', true)
@@ -279,12 +315,12 @@
 
 			function reset(){
 				
-				$('#nama_pembayaran').val('')
+				$('#id_jenis_pembayaran').val('')
 				$('input[name="tambah_harga"]').val('')
 				$('input[name="lama_angsuran"]').val('')
 				$('input[name="harga2"]').val('')
-				$('#barang_nama').val('')
-				$('input[name="barang_kode"]').val('')
+				$('#barang_kode').val('')
+				// $('input[name="barang_kode"]').val('')
 				$('input[name="jenis_bahan"]').val('')
 				$('input[name="type_barang"]').val('')
 				$('input[name="harga"]').val('')

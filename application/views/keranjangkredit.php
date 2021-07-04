@@ -14,8 +14,8 @@
 		<input type="hidden" name="type_barang_hidden[]" value="<?= $this->input->post('type_barang') ?>">
 	</td>
 	<td class="harga">
-		<?= $this->input->post('harga') ?>
-		<input type="hidden" name="harga_barang_hidden[]" id="harga2" value="<?= $this->input->post('harga') ?>">
+		<?= $this->input->post('harga2') ?>
+		<input type="hidden" name="harga_barang_hidden[]" id="harga2" value="<?= $this->input->post('harga2') ?>">
 	</td>
 	<td class="jumlah">
 		<?= $this->input->post('jumlah') ?>

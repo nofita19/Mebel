@@ -8,6 +8,10 @@ class M_barang extends CI_Model{
 		return $query->result();
 	}
 
+	public function get_where($where){
+		return $this->db->get_where('barang',$where);
+	  }
+
 	public function jumlah(){
 		$query = $this->db->get($this->_table);
 		return $query->num_rows();
@@ -23,9 +27,9 @@ class M_barang extends CI_Model{
 		return $query->row();
 	}
 
-	public function lihat_nama_barang($barang_nama){
+	public function lihat_nama_barang($barang_kode){
 		$query = $this->db->select('*');
-		$query = $this->db->where(['barang_nama' => $barang_nama]);
+		$query = $this->db->where(['barang_kode' => $barang_kode]);
 		$query = $this->db->get($this->_table);
 		return $query->row();
 	}
@@ -36,7 +40,7 @@ class M_barang extends CI_Model{
 
 	public function min_stok($stok, $nama_barang){
 		$query = $this->db->set('stok', 'stok-' . $stok, false);
-		$query = $this->db->where('nama_barang', $nama_barang);
+		$query = $this->db->where('barang_kode', $nama_barang);
 		$query = $this->db->update($this->_table);
 		return $query;
 	}

@@ -1,87 +1,74 @@
-<div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1> Detail Data Pembelian</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="<?=base_url("dashboard");?>">Dashboard</a></li>
-                            <li class="active">Pembelian</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="content mt-3">
-            <div class="card">
-            
-        <?php foreach ($data as $d) {?>
-        <?php 
-            // $hargaasli = $d['harga_asli'];
-            // $biayaproduksi = $d['biaya_produksi'];
-            // $hargatunai = $hargaasli+$biayaproduksi+$biayadisribusi+$biayatukang+$biayalainlain;
-            ?>
-                <div class="card-header">
-                <a href="<?php echo base_url('pembelian') ?>" class="btn btn-danger btn-sm btn-show-add">
-                    <span class="icon text-white-50">
-                        <i class="fa fa-reply"></i>
-                    </span>
-                    <span class="text">Kembali</span>
-                </a>
-                </div>
-                <div class="card-body">
-                <div class="row">
-                <div class="col-md-7">
-                    <div class="card-body">
-                        <table>
-                            <tr>
-                                <td>Kode Pembelian</td>
-                                <td>: <?= $d['kode_pembelian']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Nama Barang</td>
-                                <td>: <?= $d['nama_barang']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Jenis Barang</td>
-                                <td>: <?= $d['jenis_barang']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Type Barang</td>
-                                <td>: <?= $d['type_barang']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Harga</td>
-                                <td>: Rp<?= $d['harga']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Jumlah</td>
-                                <td>: <?= $d['jumlah']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Sub Total</td>
-                                <td>: Rp<?= $d['sub_total']; ?></td>
-                            </tr>
-                            <!-- <tr>
-                                <td>Harga Kredit Musiman</td>
-                                <td>: Rp<?= $d['keuntungan']; ?></td>
-                            </tr> -->
-                            <tr>
-                                <td>Tanggal</td>
-                                <td>: <?= $d['tanggal']; ?></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div> 
-		</div>
-                </div>
-            </div>
-        </div>
-<?php } ?>
+<div class="container-fluid">
+			<div id="content" data-url="<?= base_url('penjualan') ?>">
+				<div class="clearfix">
+					<div class="float-right">
+						<a href="<?= base_url('penjualan') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
+					</div>
+				</div>
+				<div class="card shadow">
+										<?php foreach ($all_detail_penjualan as $penjualan): ?>
+					<div class="card-header"><strong>Detail Penjualan - <?= $penjualan->nomor_faktur ?></strong></div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+								<table class="table table-borderless">
+									<tr>
+										<td><strong>No Penjualan</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->nomor_faktur ?></td>
+										<td><strong>Nama Pembeli</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->nama_pembeli ?></td>
+									</tr>
+									<tr>
+										<td><strong>No Telpon</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->no_telp ?></td>
+										<td><strong>Alamat Pembeli</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->alamat_pembeli ?></td>
+									</tr>
+									<tr>
+										<td><strong>Waktu Penjualan</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->tanggal ?></td>
+										<td><strong>Foto Ktp</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->foto_ktp ?></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table table-bordered">
+									<thead><?php 
+                                            if ( $penjualan->id_jenis_pembayaran==1) { ?>
+										<tr>
+											<td><strong>No</strong></td>
+											<td><strong>Tanggal Bayar</strong></td>
+											<td><strong>Harga</strong></td>
+											<td><strong>Dp</strong></td>
+											<td><strong>Bayar</strong></td>
+											<td><strong>Status Bayar</strong></td>
+										</tr>
+									</thead>
+									<tbody>
+											<tr>
+												<td><?= $no++ ?></td>
+										        <td><?= $penjualan->tanggal ?></td>
+												<td>Rp <?= number_format($penjualan->harga, 0, ',', '.') ?></td>
+												<td><?= '0'?></td>
+											<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
+												<td><?= 'Lunas' ?></td>
+											</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+                    <?php endforeach ?>
+				</div>
+				</div>
