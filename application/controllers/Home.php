@@ -12,6 +12,7 @@ class Home extends CI_Controller{
     {
         $now = date("m");
 
+        $arrayTitle = [];
         $before = $now - 5;
         $arrayNumber = [];
         $arrayValuepembelian = [];
@@ -42,11 +43,11 @@ class Home extends CI_Controller{
         //     $key = array_search(str_pad($row->date,2,0,STR_PAD_LEFT),$arrayNumber);
         //     $arrayValueService[$key] = $row->total;
         // }
-    
-        
-        $data["valuepembelian"] = $arrayValuepembelian;
 
-        $data['title'] = "Grafik Data";
+        $data["title"] = $arrayTitle;
+        $data["valuepembelian"] = $arrayValuepembelian;
+        // var_dump($data);
+        // die;
         $this->load->view('template/header',$data);
         $this->load->view('dashboard',$data);
         $this->load->view('template/footer',$data);

@@ -163,7 +163,7 @@ class Penjualan extends CI_Controller {
 	}
 
     public function keranjang_barangkredit(){
-		$this->load->view('keranjang');
+		$this->load->view('keranjangkredit');
 	}
 
     public function bayar_barang(){
@@ -171,7 +171,7 @@ class Penjualan extends CI_Controller {
 	}
 
     public function bayar_barangkredit(){
-		$this->load->view('bayar');
+		$this->load->view('bayarkredit');
 	}
 
     public function delete($nomor_faktur){

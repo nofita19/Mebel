@@ -46,6 +46,8 @@ if(!isset($authPage)) {
   <script src="<?=base_url();?>assets/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="<?=base_url();?>assets/daterangepicker/js/datepicker-full.min.js"></script>
   <script src="<?=base_url();?>assets/sufee/vendors/chart.js/dist/Chart.min.js"></script>
+
+  <!-- <script src="<?=base_url();?>assets/sufee/vendors/chart.js/dist/Chart.min.js"></script> -->
   <script src="<?=base_url();?>assets/dropify/js/dropify.min.js"></script>
   <script src="<?php echo base_url('assets/tabel/jquery.dataTables.min.js');?>"></script>
   <script src="<?php echo base_url('assets/tabel/dataTables.bootstrap4.min.js');?>"></script>

@@ -21,6 +21,14 @@
 										<td><?= $penjualan->nama_pembeli ?></td>
 									</tr>
 									<tr>
+										<td><strong>Nama Barang</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->barang_nama ?></td>
+										<td><strong>Type Barang</strong></td>
+										<td>:</td>
+										<td><?= $penjualan->type_barang ?></td>
+									</tr>
+									<tr>
 										<td><strong>No Telpon</strong></td>
 										<td>:</td>
 										<td><?= $penjualan->no_telp ?></td>

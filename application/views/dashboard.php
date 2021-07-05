@@ -35,11 +35,11 @@
                     <div class="card text-white bg-info">
                         <div class="card-body pb-0">
                             <div class="float-right">
-                                <i class="fa fa-cogs"></i>
+                                <i class="fa fa-share"></i>
                             </div>
                             <h4 class="mb-0">
                             </h4>
-                            <p class="text-light">Pembelian Selesai Hari Ini</p>
+                            <p class="text-light">Pengeluaran Hari Ini</p>
                         </div>
                     </div>
                 </div>
@@ -47,23 +47,23 @@
                     <div class="card text-white bg-warning">
                         <div class="card-body pb-0">
                             <div class="float-right">
-                                <i class="fa fa-share"></i>
+                                <i class="fa fa-cogs"></i>
                             </div>
                             <h4 class="mb-0">
                             </h4>
-                            <p class="text-light">Item Terjual Hari Ini</p>
+                            <p class="text-light">Total Penjualan</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
-                    <div class="card text-white bg-danger">
+                    <div class="card text-white bg-primary">
                         <div class="card-body pb-0">
                             <div class="float-right">
-                                <i class="fa fa-warning"></i>
+                                <i class="fa fa-cogs"></i>
                             </div>
                             <h4 class="mb-0">
                             </h4>
-                            <p class="text-light">Stock Telah Habis</p>
+                            <p class="text-light">Total Pembelian</p>
                         </div>
                     </div>
                 </div>
@@ -76,8 +76,8 @@
                         </div>
                         <div class="card-body">
                         <!-- <?php
-            var_dump($valuepembelian);
-                        ?> -->
+                            var_dump($title);
+                        ?>  -->
                             <canvas id="myChart1" width="400" height="100"></canvas>
                         </div>
                     </div>
@@ -121,4 +121,5 @@
                     });
                     
                 </script>
-               
+
+<script src="<?=base_url();?>assets/sufee/vendors/chart.js/dist/Chart.min.js"></script>

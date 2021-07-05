@@ -22,8 +22,8 @@
 									<div class="form-row">
 										<div class="form-group col-3">
 											<label for="barang_kode">Nama Barang</label>
-											<select name="barang_kode" id="barang_kode" class="form-control">
-												<option value="">Pilih Barang</option>
+											<select name="barang_kode" id="barang_kode" class="barang_kode form-control">
+												<option disabled="disabled" selected="selected">Pilih Barang</option>
 												<?php foreach ($all_barang as $barang): ?>
 													<option value="<?= $barang->barang_kode ?>"><?= $barang->barang_nama ?></option>
 												<?php endforeach ?>
@@ -43,9 +43,11 @@
 											<label for="id_jenis_pembayaran">Pembayaran</label>
 											<select name="id_jenis_pembayaran" id="id_jenis_pembayaran" class="form-control">
 												<option value="">Pilih Pembayaran</option>
-												<?php foreach ($all_pembayaran as $pembayaran): ?>
+												<option value='2'>Kredit Bulanan</option>
+												<option value='3'>Kredit Musiman</option>
+												<!-- <?php foreach ($all_pembayaran as $pembayaran): ?>
 													<option value="<?= $pembayaran->id_jenis_pembayaran ?>"><?= $pembayaran->nama_pembayaran ?></option>
-												<?php endforeach ?>
+												<?php endforeach ?> -->
 											</select>
 										</div>
 											<input type="hidden" name="tambah_harga" value="" readonly class="form-control">
@@ -71,10 +73,10 @@
 											<button disabled type="button" class="btn btn-primary btn-block" id="tambah"><i class="fa fa-plus"></i></button>
 										</div>
 									</div>
-									<div class="keranjang">
+									<div class="keranjangkredit">
 										<h5>Detail Penjualan</h5>
 										<hr>
-										<table class="table table-bordered" id="keranjang">
+										<table class="table table-bordered" id="keranjangkredit">
 											<thead>
 												<tr>
 													<td width="20%">Nama Barang</td>
@@ -90,14 +92,18 @@
 											</tbody>
 										</table>
 									</div>
-									<table class="table table-bordered" id="bayar">
+									<table class="table table-bordered" id="bayarkredit">
 											<thead>
 												<tr>
-													<td width="10%">Nama Pembeli</td>
-													<td width="30%">Alamat Pembeli</td>
-													<td width="10%">No Telpon</td>
-													<td width="15%">Foto KTP</td>
-													<td width="20%">Bayar</td>
+												<td width="30%">Nama Pembeli</td>
+												<td width="30%">Alamat Pembeli</td>
+												<td width="20%">No Telpon</td>
+												<td width="10%">Foto KTP</td>
+												<?php foreach ($all_pembayaran as $pembayaran): ?>
+												<?php if($pembayaran->id_jenis_pembayaran==2) { ?>
+												<td width="10%">DP</td><?php } 
+												?>
+												<?php endforeach ?>
 												</tr>
 											</thead>
 											<tbody>
@@ -211,8 +217,8 @@
 
 			//keranjang
 			$(document).on('click', '#tambah', function(e){
-				const url_keranjang_barang = $('#content').data('url') + '/keranjang_barang'
-				const data_keranjang = {
+				const url_keranjang_barangkredit = $('#content').data('url') + '/keranjang_barangkredit'
+				const data_keranjangkredit = {
 					barang_kode: $('select[name="barang_kode"]').val(),
 					id_jenis_pembayaran: $('select[name="id_jenis_pembayaran"]').val(),
 					barang_nama: $('input[name="barang_nama"]').val(),
@@ -230,18 +236,18 @@
 					sub_total: $('input[name="sub_total"]').val(),
 				}
 
-				if(parseInt($('input[name="max_hidden"]').val()) <= parseInt(data_keranjang.jumlah)) {
+				if(parseInt($('input[name="max_hidden"]').val()) <= parseInt(data_keranjangkredit.jumlah)) {
 					alert('stok tidak tersedia! stok tersedia : ' + parseInt($('input[name="max_hidden"]').val()))	
 				} else {
 					$.ajax({
-						url: url_keranjang_barang,
+						url: url_keranjang_barangkredit,
 						type: 'POST',
-						data: data_keranjang,
+						data: data_keranjangkredit,
 						success: function(data){
-							if($('select[name="barang_kode"]').val() == data_keranjang.nama_barang) $('option[value="' + data_keranjang.nama_barang + '"]').hide()
+							if($('select[name="barang_kode"]').val() == data_keranjangkredit.nama_barang) $('option[value="' + data_keranjang.nama_barang + '"]').hide()
 							reset()
 
-							$('table#keranjang tbody').append(data)
+							$('table#keranjangkredit tbody').append(data)
 							$('tfoot').show()
 
 							$('#total').html('<strong>' + hitung_total() + '</strong>')
@@ -254,8 +260,8 @@
 
 			//id bayar
 			$(document).ready(function(e){
-				const url_bayar_barang = $('#content').data('url') + '/bayar_barang'
-				const data_bayar = {
+				const url_bayar_barangkredit = $('#content').data('url') + '/bayar_barangkredit'
+				const data_bayarkredit = {
 					barang_kode: $('select[name="barang_kode"]').val(),
 					id_jenis_pembayaran: $('select[name="id_jenis_pembayaran"]').val(),
 					nama_pembeli: $('input[name="nama_pembeli"]').val(),
@@ -265,13 +271,13 @@
 					dp: $('input[name="dp"]').val(),
 				}
 					$.ajax({
-						url: url_bayar_barang,
+						url: url_bayar_barangkredit,
 						type: 'POST',
-						data: data_bayar,
+						data: data_bayarkredit,
 						success: function(data){
-							if($('select[name="barang_kode"]').val() == data_bayar.id_jenis_pembayaran) $('option[value="' + data_bayar.id_jenis_pembayaran + '"]').hide()
+							if($('select[name="barang_kode"]').val() == data_bayarkredit.id_jenis_pembayaran) $('option[value="' + data_bayar.id_jenis_pembayaran + '"]').hide()
 							reset()
-							$('table#bayar tbody').append(data)
+							$('table#bayarkredit tbody').append(data)
 							$('tfoot').show()
 
 							// $('#total').html('<strong>' + hitung_total() + '</strong>')
@@ -283,7 +289,7 @@
 
 
 			$(document).on('click', '#tombol-hapus', function(){
-				$(this).closest('.row-keranjang').remove()
+				$(this).closest('.row-keranjangkredit').remove()
 				
 				$('#total').html('<strong>' + hitung_total() + '</strong>')
 				$('input[name="total_hidden"]').val(hitung_total())
@@ -320,7 +326,7 @@
 				$('input[name="lama_angsuran"]').val('')
 				$('input[name="harga2"]').val('')
 				$('#barang_kode').val('')
-				// $('input[name="barang_kode"]').val('')
+				$('input[name="barang_kode"]').val('')
 				$('input[name="jenis_bahan"]').val('')
 				$('input[name="type_barang"]').val('')
 				$('input[name="harga"]').val('')
@@ -331,3 +337,22 @@
 			}
 		})
 	</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+ <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<script>
+        $(document).ready(function() {
+            $('.barang_kode').select2();
+            $('.barang_kode').change(function(){
+                let barang_kode = this.value;
+                $.ajax({
+                    url: '<?= base_url() ?>/Penjualan/getDateAjax',
+                    method: 'post',
+                    data: {barang_kode:barang_kode},
+                    success: 
+                    function(result){
+                    }
+                });
+            });
+        });
+    </script>

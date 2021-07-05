@@ -7,6 +7,7 @@ class Barang extends CI_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('Model_master', 'v');
+        $this->load->model('M_barang', 'w');
     }
     
     public $image = "default.jpg";
@@ -90,82 +91,106 @@ class Barang extends CI_Controller {
     }
 
     public function edit_data($barang_kode){
-        $this->load->model('v');
-        $barang = $this->v->GetWhere('barang', array('barang_kode' => $barang_kode));
-        $data = array(
-            'barang_kode' => $barang[0]['barang_kode'],
-            'barang_nama' => $barang[0]['barang_nama'],
-            'jenis_bahan' => $barang[0]['jenis_bahan'],
-            'type_barang' => $barang[0]['type_barang'],
-            'harga_asli' => $barang[0]['harga_asli'],
-            'biaya_produksi' => $barang[0]['biaya_produksi'],
-            'biaya_tukang' => $barang[0]['biaya_tukang'],
-            'biaya_distribusi' => $barang[0]['biaya_distribusi'],
-            'biaya_lainlain' => $barang[0]['biaya_lainlain'],
-            'keuntungan' => $barang[0]['keuntungan'],
-            // 'harga_tunai' => $barang[0]['harga_tunai'],
-            // 'harga_kredit_bulananan' => $barang[0]['harga_kredit_bulananan'],
-            // 'harga_kredit_musiman' => $barang[0]['harga_kredit_musiman'],
-            'stok' => $barang[0]['stok'],
-            'foto' => $barang[0]['foto']
-            );
+        
+        // form validation config ===============================
+        $this->form_validation->set_rules('barang_nama', 'barang_nama', 'required|trim|max_length[50]');
+        $this->form_validation->set_rules('type_barang', 'type_barang', 'required|trim|max_length[100]');
+        $data['data_edit'] = $this->w->getBy($barang_kode);
+        // ===============================
+        
+        if ($this->form_validation->run() == FALSE) {
         $this->load->view("template/header",$data);
         $this->load->view('barangupdate',$data);
         $this->load->view("template/footer");
-    }
-
-    public function update_data(){
-        $barang_kode = $_POST['barang_kode'];
-        $barang_nama = $_POST['barang_nama'];
-        $jenis_bahan = $_POST['jenis_bahan'];
-        $type_barang = $_POST['type_barang'];
-        $harga_asli = $_POST['harga_asli'];
-        $biaya_produksi = $_POST['biaya_produksi'];
-        $biaya_tukang = $_POST['biaya_tukang'];
-        $biaya_distribusi = $_POST['biaya_distribusi'];
-        $biaya_lainlain = $_POST['biaya_lainlain'];
-        $keuntungan = $_POST['keuntungan'];
-        // $harga_tunai = $_POST['harga_tunai'];
-        // $harga_kredit_bulananan = $_POST['harga_kredit_bulananan'];
-        // $harga_kredit_musiman = $_POST['harga_kredit_musiman'];
-        $stok = $_POST['stok'];
-        if (!empty($_FILES["foto"]["name"])) {
-            $this->foto =$this->_uploadImage();
+    } else {
+        // update thumbnail atatu tidak
+        if ($_FILES['foto']['error'] != 4) {
+            $image = $this->upload_image('foto', './img/barang/');
         } else {
-            $this->foto =  $_POST["old_image"];
-		}
-        $data = array(
-            'barang_nama' => $barang_nama,
-            'jenis_bahan' => $jenis_bahan,
-            'type_barang' => $type_barang,
-            'harga_asli' => $harga_asli,
-            'biaya_produksi' => $biaya_produksi,
-            'biaya_tukang' => $biaya_tukang,
-            'biaya_distribusi' => $biaya_distribusi,
-            'biaya_lainlain' => $biaya_lainlain,
-            'keuntungan' => $keuntungan,
-            // 'harga_tunai' => $harga_tunai,
-            // 'harga_kredit_bulananan' => $harga_kredit_bulananan,
-            // 'harga_kredit_musiman' => $harga_kredit_musiman,
-            'stok' => $stok,
-            // 'foto' => $this->input->post('old_image')
-         );
-        $where = array(
-            'barang_kode' => $barang_kode,
-        );
-        $this->load->model('v');
-        $res = $this->v->Update('barang', $data, $where);
-        if ($res>0) {
-            redirect('barang','refresh');
+            $image = $data['foto']['foto'];
+        }
+
+        $data_user_update = [
+            
+            'barang_kode' =>$this->input->post('barang_kode'),
+            'barang_nama' =>$this->input->post('barang_nama'),
+            'jenis_bahan' =>$this->input->post('jenis_bahan'),
+            'type_barang' =>$this->input->post('type_barang'),
+            'harga_asli' =>$this->input->post('harga_asli'),
+            'biaya_produksi' =>$this->input->post('biaya_produksi'),
+            'biaya_tukang' =>$this->input->post('biaya_tukang'),
+            'biaya_distribusi' =>$this->input->post('biaya_distribusi'),
+            'biaya_lainlain' =>$this->input->post('biaya_lainlain'),
+            'keuntungan' =>$this->input->post('keuntungan'),
+            'stok' =>$this->input->post('stok'),
+            'foto' => $image,
+
+        ];
+
+        if ($this->w->updateBarang($data_user_update, $barang_kode)) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Berhasil Memperbaharui Data </div>');
+
+            redirect('Barang');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Gagal Memperbaharui Data</div>');
+
+            redirect('Barang');
         }
     }
+    }  
 
-    public function delete($barang_kode){
-        $barang_kode = array('barang_kode' => $barang_kode);
-        $this->load->model('v');
-        $this->v->Delete('barang', $barang_kode);
-        redirect(base_url('barang'),'refresh');
-    }
+    // public function update_data(){
+    //     $barang_kode = $_POST['barang_kode'];
+    //     $barang_nama = $_POST['barang_nama'];
+    //     $jenis_bahan = $_POST['jenis_bahan'];
+    //     $type_barang = $_POST['type_barang'];
+    //     $harga_asli = $_POST['harga_asli'];
+    //     $biaya_produksi = $_POST['biaya_produksi'];
+    //     $biaya_tukang = $_POST['biaya_tukang'];
+    //     $biaya_distribusi = $_POST['biaya_distribusi'];
+    //     $biaya_lainlain = $_POST['biaya_lainlain'];
+    //     $keuntungan = $_POST['keuntungan'];
+    //     // $harga_tunai = $_POST['harga_tunai'];
+    //     // $harga_kredit_bulananan = $_POST['harga_kredit_bulananan'];
+    //     // $harga_kredit_musiman = $_POST['harga_kredit_musiman'];
+    //     $stok = $_POST['stok'];
+    //     if (!empty($_FILES["foto"]["name"])) {
+    //         $this->foto =$this->_uploadImage();
+    //     } else {
+    //         $this->foto =  $_POST["old_image"];
+	// 	}
+    //     $data = array(
+    //         'barang_nama' => $barang_nama,
+    //         'jenis_bahan' => $jenis_bahan,
+    //         'type_barang' => $type_barang,
+    //         'harga_asli' => $harga_asli,
+    //         'biaya_produksi' => $biaya_produksi,
+    //         'biaya_tukang' => $biaya_tukang,
+    //         'biaya_distribusi' => $biaya_distribusi,
+    //         'biaya_lainlain' => $biaya_lainlain,
+    //         'keuntungan' => $keuntungan,
+    //         // 'harga_tunai' => $harga_tunai,
+    //         // 'harga_kredit_bulananan' => $harga_kredit_bulananan,
+    //         // 'harga_kredit_musiman' => $harga_kredit_musiman,
+    //         'stok' => $stok,
+    //         // 'foto' => $this->input->post('old_image')
+    //      );
+    //     $where = array(
+    //         'barang_kode' => $barang_kode,
+    //     );
+    //     $this->load->model('v');
+    //     $res = $this->v->Update('barang', $data, $where);
+    //     if ($res>0) {
+    //         redirect('barang','refresh');
+    //     }
+    // }
+
+    // public function delete($barang_kode){
+    //     $barang_kode = array('barang_kode' => $barang_kode);
+    //     $this->load->model('v');
+    //     $this->v->Delete('barang', $barang_kode);
+    //     redirect(base_url('barang'),'refresh');
+    // }
 
     private function _uploadImage()
 	{
@@ -185,4 +210,43 @@ class Barang extends CI_Controller {
 		
 		return "default.jpg";
 	}
+
+    // fungsi untuk upload image
+    private function upload_image($name, $address)
+    {
+        $this->load->library('upload');
+        // ./assets/images/
+        $config['upload_path'] = $address; //path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
+        $config['max_size'] = 10000;
+
+        $this->upload->initialize($config);
+
+        if (!empty($_FILES[$name]['name'])) {
+
+            if ($this->upload->do_upload($name)) {
+                $gbr = $this->upload->data();
+                //Compress Image
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = $address . $gbr['file_name'];
+                $config['create_thumb'] = FALSE;
+                $config['maintain_ratio'] = TRUE;
+                $config['quality'] = '80%';
+                $config['width'] = 1024;
+                $config['height'] = 800;
+                $config['new_image'] = $address . $gbr['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+
+                $gambar = $gbr['file_name'];
+
+                return $gambar;
+            } else {
+                echo "gagal upload";
+            }
+        } else {
+            return 'no-image.jpg';
+        }
+    }
 }

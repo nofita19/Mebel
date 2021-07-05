@@ -22,6 +22,11 @@ class M_barang extends CI_Model{
 		return $query->result();
 	}
 
+	public function getBy($data)
+    {
+        return $this->db->get_where('barang', ['barang_kode' => $data])->row_array();
+    }
+
 	public function lihat_id($barang_kode){
 		$query = $this->db->get_where($this->_table, ['barang_kode' => $barang_kode]);
 		return $query->row();
@@ -55,4 +60,9 @@ class M_barang extends CI_Model{
 	public function hapus($kode_barang){
 		return $this->db->delete($this->_table, ['kode_barang' => $kode_barang]);
 	}
+
+	public function updateBarang($data, $param)
+    {
+        return $this->db->update('barang', $data, ['barang_kode' => $param]);
+    }
 }

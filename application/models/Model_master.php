@@ -81,4 +81,10 @@ class Model_master extends CI_Model {
       return $this->db->get("transaksi_pembelian");
       
   }
+
+  public function graph()
+	{
+		$data = $this->db->query("SELECT * from transaksi_pembelian");
+		return $data->result();
+	}
 }

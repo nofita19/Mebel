@@ -1,58 +1,58 @@
 <div class="container-fluid">
 
   <h1 class="h3 mb-2 text-gray-800">Edit Data Barang</h1>
-  <form action="<?php echo base_url()."barang/update_data"; ?>" method="post">
+  <form action="" method="post">
 
     <div class="card shadow mb-4">
       <div class="card-body">
         <!-- /.row -->
-        <div class="row"><?= $this->session->flashdata('pesan') ?>
+        <?= $this->session->flashdata('message'); ?>
           <div class="col-lg-12">
             <div class="panel-body">
               <div class="row">
                 <div class="col-lg-6">
                  <div class="form-group">
                     <label>Kode Barang</label>
-                    <input class="form-control" type="text" id="barang_kode" name="barang_kode" required value="<?php echo $barang_kode; ?>">
+                    <input class="form-control" type="text" id="barang_kode" name="barang_kode" required value="<?= $data_edit['barang_kode']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Nama Barang</label>
-                    <input class="form-control" type="text" id="barang_nama" name="barang_nama" required value="<?php echo $barang_nama; ?>">
+                    <input class="form-control" type="text" id="barang_nama" name="barang_nama" required value="<?= $data_edit['barang_nama']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Jenis Barang</label>
-                    <input class="form-control" type="text" id="jenis_bahan" name="jenis_bahan" required value="<?php echo $jenis_bahan; ?>">
+                    <input class="form-control" type="text" id="jenis_bahan" name="jenis_bahan" required value="<?= $data_edit['jenis_bahan']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Type Barang</label>
-                    <input class="form-control" type="text" id="type_barang" name="type_barang" required value="<?php echo $type_barang; ?>">
+                    <input class="form-control" type="text" id="type_barang" name="type_barang" required value="<?= $data_edit['type_barang']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Harga Asli</label>
-                    <input class="form-control" type="number" id="harga_asli" name="harga_asli" required value="<?php echo $harga_asli; ?>">
+                    <input class="form-control" type="number" id="harga_asli" name="harga_asli" required value="<?= $data_edit['harga_asli']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Biaya Produksi</label>
-                    <input class="form-control" type="number" id="biaya_produksi" name="biaya_produksi" required value="<?php echo $biaya_produksi; ?>">
+                    <input class="form-control" type="number" id="biaya_produksi" name="biaya_produksi" required value="<?= $data_edit['biaya_produksi']; ?>">
                   </div>
                 </div>
                 <!-- /.col-lg-6 nested -->
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label>Biaya Tukang</label>
-                    <input class="form-control" type="number" id="biaya_tukang" name="biaya_tukang" required value="<?php echo $biaya_tukang; ?>">
+                    <input class="form-control" type="number" id="biaya_tukang" name="biaya_tukang" required value="<?= $data_edit['biaya_tukang']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Biaya Distribusi</label>
-                    <input class="form-control" type="number" id="biaya_distribusi" name="biaya_distribusi" required value="<?php echo $biaya_distribusi; ?>">
+                    <input class="form-control" type="number" id="biaya_distribusi" name="biaya_distribusi" required value="<?= $data_edit['biaya_distribusi']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Biaya Lain-Lain</label>
-                    <input class="form-control" type="number" id="biaya_lainlain" name="biaya_lainlain" required value="<?php echo $biaya_lainlain; ?>">
+                    <input class="form-control" type="number" id="biaya_lainlain" name="biaya_lainlain" required value="<?= $data_edit['biaya_lainlain']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Keuntungan</label>
-                    <input class="form-control" type="number" id="keuntungan" name="keuntungan" required value="<?php echo $keuntungan; ?>">
+                    <input class="form-control" type="number" id="keuntungan" name="keuntungan" required value="<?= $data_edit['keuntungan']; ?>">
                   </div>
                   <!-- <div class="form-group">
                     <label>Harga Tunai</label>
@@ -68,18 +68,15 @@
                   </div> -->
                   <div class="form-group">
                     <label>Stok</label>
-                    <input class="form-control" type="number" id="stok" name="stok" required value="<?php echo $stok; ?>">
+                    <input class="form-control" type="number" id="stok" name="stok" required value="<?= $data_edit['stok']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Foto Barang</label>
-                    <input class="form-control-file <?php echo form_error('foto') ? 'is-invalid':'' ?>" type="file" name="foto" />
-								<input type="hidden" name="old_image" value="<?php echo $foto ?>" />
-								<div class="invalid-feedback">
-									<?php echo form_error('foto') ?>
-								</div>
+                    <input class="form-control-file " type="file" name="foto" accept="foto/*"/>
                     <!-- <input class="form-control" type="file" id="foto" name="foto" required value="<?php echo $foto; ?>" > -->
                   </div>
-                  <input class="btn btn-info btn-icon-split" type="submit" name="submit" value="Update">
+                  <!-- <input class="btn btn-info btn-icon-split" type="submit" name="submit" value="Update"> -->
+	                <button type="submit" class="btn btn-primary btn-md" name="edit_user" value="true">Simpan Data</button>
                   <!-- <button type="submit" class="btn btn-info btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fa fa-plus"></i>

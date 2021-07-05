@@ -1,4 +1,4 @@
-<tr class="row-keranjang">
+<tr class="row-keranjangkredit">
 <input type="hidden" name="id_jenis_pembayaran_hidden" value="<?= $this->input->post('id_jenis_pembayaran') ?>"></td>
 		<input type="hidden" name="kode_barang_hidden[]" value="<?= $this->input->post('barang_kode') ?>">
 	<td class="barang_nama">
