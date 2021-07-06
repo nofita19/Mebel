@@ -153,6 +153,7 @@ class Pembelian extends CI_Controller {
         $bulanakhir = htmlspecialchars($this->input->post('bulanakhir', true));
 
         $data['bybulan'] = $this->v->filterbybulan($tahun1, $bulanawal1, $bulanakhir);
+        $data['sum'] = $this->v->sum();
         $this->load->view('report/laporan_by_bulan_pembelian', $data);
     }
 
@@ -164,6 +165,7 @@ class Pembelian extends CI_Controller {
         $tahun2 = htmlspecialchars($this->input->post('tahun2', true));
 
         $data['bytahun'] = $this->v->filterbytahun($tahun2);
+        $data['sum'] = $this->v->sum();
         $this->load->view('report/laporan_by_tahun_pembelian', $data);
     }
 
