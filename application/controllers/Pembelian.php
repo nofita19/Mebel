@@ -106,6 +106,8 @@ class Pembelian extends CI_Controller {
         $jumlah = $_POST['jumlah'];
         $total = $_POST['total'];
         $tanggal = $_POST['tanggal'];
+        
+        $totalharga=$harga*$jumlah;
 
         $data = array(
             'nama_barang' => $nama_barang,
@@ -113,7 +115,7 @@ class Pembelian extends CI_Controller {
             'type_barang' => $type_barang,
             'harga' => $harga,
             'jumlah' => $jumlah,
-            'total' => $total,
+            'total' => $totalharga,
             'tanggal' => $tanggal
          );
         $where = array(

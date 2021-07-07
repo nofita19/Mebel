@@ -20,7 +20,6 @@
 
         <div class="content mt-3">
             <div class="card">
-            
         <?php foreach ($data as $d) {?>
         <?php 
             $hargaasli = $d['harga_asli'];
@@ -46,64 +45,64 @@
                 <div class="col-md-4">
                     <img src="<?= base_url(); ?>./img/barang/<?= $d['foto']; ?>" class="card-img-top">
                 </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-7">
                     <div class="card-body">
                         <table>
                             <tr>
-                                <td><strong>Kode Barang</strong></td>
-                                <td>:</td>
-                                <td><?= $d['barang_kode']; ?></td>
-                                <td><strong>Nama Barang</strong></td>
-                                <td>:</td>
-                                <td><?= $d['barang_nama']; ?></td>
+                                <td>Kode Barang</td>
+                                <td>: <?= $d['barang_kode']; ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Jenis Barang</strong></td>
-                                <td>:</td>
-                                <td><?= $d['jenis_bahan']; ?></td>
-                                <td><strong>Type Barang</strong></td>
-                                <td>:</td>
-                                <td><?= $d['type_barang']; ?></td>
+                                <td>Nama Barang</td>
+                                <td>: <?= $d['barang_nama']; ?></td>
+                            </tr><tr>
+                                <td>Jenis Barang</td>
+                                <td>: <?= $d['jenis_bahan']; ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Harga Asli</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $d['harga_asli']; ?></td>
-                                <td><strong>Biaya Produksi</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $d['biaya_produksi']; ?></td>
+                                <td>Type Barang</td>
+                                <td>: <?= $d['type_barang']; ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Biaya Tukang</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $d['biaya_tukang']; ?></td>
-                                <td><strong>Biaya Distribusi</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $d['biaya_distribusi']; ?></td>
+                                <td>Harga Asli</td>
+                                <td>: Rp<?= $d['harga_asli']; ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Biaya Lain-lain</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $d['biaya_lainlain']; ?></td>
-                                <td><strong>Keuntungan</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $d['keuntungan']; ?></td>
+                                <td>Biaya Produksi</td>
+                                <td>: Rp<?= $d['biaya_produksi']; ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Harga Tunai</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $hargatunai; ?></td>
-                                <td><strong>Harga Kredit Bulananan</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $hargabulanan; ?></td>
+                                <td>Biaya Tukang</td>
+                                <td>: Rp<?= $d['biaya_tukang']; ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Harga Kredit Musiman</strong></td>
-                                <td>:</td>
-                                <td>Rp<?= $hargamusiman; ?></td>
-                                <td><strong>Stok</strong></td>
-                                <td>:</td>
-                                <td><?= $d['stok']; ?></td>
+                                <td>Biaya Distribusi</td>
+                                <td>: Rp<?= $d['biaya_distribusi']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Biaya Lain-lain</td>
+                                <td>: Rp<?= $d['biaya_lainlain']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Keuntungan</td>
+                                <td>: Rp<?= $d['keuntungan']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Harga Tunai</td>
+                                <td>: Rp<?= $hargatunai; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Harga Kredit Bulananan</td>
+                                <td>: Rp<?= $hargabulanan; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Harga Kredit Musiman</td>
+                                <td>: Rp<?= $hargamusiman; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Stok</td>
+                                <td>: <?= $d['stok']; ?></td>
                             </tr>
                         </table>
                     </div>

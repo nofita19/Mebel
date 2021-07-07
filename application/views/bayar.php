@@ -14,7 +14,7 @@
 	</td>
 	<td class="foto_ktp">
 		<!-- <?= $this->input->post('foto_ktp') ?> -->
-		<input type="file" name="foto_ktp_hidden" required>
+		<input type="file" name="foto_ktp_hidden">
 	</td>
 </tr>
 

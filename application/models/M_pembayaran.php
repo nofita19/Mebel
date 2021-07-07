@@ -2,7 +2,6 @@
 
 class M_pembayaran extends CI_Model{
 	protected $_table = 'jenis_pembayaran';
-	protected $_tablae = 'angsuran';
 
 
 	public function lihat_pembayaran($id_jenis_pembayaran){
@@ -16,9 +15,10 @@ class M_pembayaran extends CI_Model{
 		$query = $this->db->get($this->_table);
 		return $query->result();
 	}
-
-	public function tambah($data){
-		return $this->db->insert($this->$_tablae, $data);
-	}
+	
+	public function insertAngsuran($data)
+    {
+        return $this->db->insert('angsuran', $data);
+    }
 
 }

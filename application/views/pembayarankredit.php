@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <h1 class="h3 mb-2 text-gray-800">Pembayaran</h1>
-  <form action="" method="post" enctype="multipart/form-data">
+  <form action="<?= base_url('Pembayaran/tambah_cicilan') ?>" method="post" enctype="multipart/form-data">
 
     <div class="card shadow mb-4">
       <div class="card-body">
@@ -11,9 +11,10 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-lg-6">
+                    <input class="form-control" type="hidden" disabled  name="kode_angsuran">
                   <div class="form-group">
                     <label>Nomor Faktur</label>
-                    <input class="form-control" type="text" disabled id="nomor_faktur" name="nomor_faktur" value="<?= $nomor_faktur ?>" required>
+                    <input class="form-control" type="text" id="nomor_faktur" name="nomor_faktur" value="<?= $nomor_faktur ?>" required>
                   </div>
                   <div class="form-group">
                     <label>Angsuran Ke</label>
@@ -23,7 +24,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label>Bayar</label>
-                    <input class="form-control" type="number" disabled id="bayar" name="bayar" value="<?= $bayar ?>" required>
+                    <input class="form-control" type="number"  id="bayar" name="bayar" value="<?= $bayar ?>" required>
                   </div>
                   <div class="form-group">
                     <label>Tanggal</label>

@@ -29,15 +29,15 @@ class Pembayaran extends CI_Controller {
             $this->load->view('pembayarankredit',$data);
             $this->load->view("template/footer");
         } else {
-            $tambah = $this->m_pembayaran->insert("angsuran" , array(
-                // 'kode_angsuran' =>$this->input->post('kode_angsuran'),
-                'nomor_faktur' =>$this->input->post('nomor_faktur'),
-                'angsuran_ke' =>$this->input->post('angsuran_ke'),
-                'bayar' =>$this->input->post('bayar'),
-                'tanggal' =>$this->input->post('tanggal')
-            ));
+            $data_bayar = [
+                'kode_angsuran' => $this->input->post('kode_angsuran', true),
+                'nomor_faktur' => $this->input->post('nomor_faktur', true),
+                'angsuran_ke' => $this->input->post('angsuran_ke', true),
+                'bayar' => $this->input->post('bayar', true),
+                'tanggal' => $this->input->post('tanggal', true),
+            ];
 
-            if($tambah){
+            if ($this->m_pembayaran->insertAngsuran($data_bayar)) {
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Berhasil Menambahkan Data !
             </div>');
@@ -46,9 +46,35 @@ class Pembayaran extends CI_Controller {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                     Gagal Menambahkan Data!
                 </div>');
-                redirect('penjualan');
+                redirect('penjualan');	
             }
         }
+	}
+
+	public function tambah_cicilan(){
+		$data['nomor_faktur'] = $this->uri->segment('3');
+		$data['bayar'] = $this->uri->segment('4');
+		$data['title'] = "Data Pembayaran";
+     
+		$data_bayar = [
+			'kode_angsuran' => $this->input->post('kode_angsuran', true),
+			'nomor_faktur' => $this->input->post('nomor_faktur', true),
+			'angsuran_ke' => $this->input->post('angsuran_ke', true),
+			'bayar' => $this->input->post('bayar', true),
+			'tanggal' => $this->input->post('tanggal', true),
+		];
+
+		if ($this->m_pembayaran->insertAngsuran($data_bayar)) {
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+			Berhasil Menambahkan Data !
+		</div>');
+		redirect('penjualan');
+		} else {
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+				Gagal Menambahkan Data!
+			</div>');
+			redirect('penjualan');	
+		}
 	}
 
   

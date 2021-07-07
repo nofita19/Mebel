@@ -52,6 +52,7 @@ class Barang extends CI_Controller {
             // $config['upload_path'] = './img/barang/';
             // $this->load->library('upload' , $config);
             // if ($this->upload->do_upload('foto')) {
+            $image = $this->upload_image('foto', './img/barang/');
             $tambah = $this->v->insert("barang" , array(
                 'barang_kode' =>$this->input->post('barang_kode'),
                 'barang_nama' =>$this->input->post('barang_nama'),
@@ -67,7 +68,7 @@ class Barang extends CI_Controller {
                 // 'harga_kredit_bulananan' =>$this->input->post('harga_kredit_bulananan'),
                 // 'harga_kredit_musiman' =>$this->input->post('harga_kredit_musiman'),
                 'stok' =>$this->input->post('stok'),
-                'foto' =>$this->_uploadImage()
+                'foto' =>$image
             ));
 
             if($tambah){
@@ -157,6 +158,14 @@ class Barang extends CI_Controller {
 		
 		return "default.jpg";
 	}
+
+    
+    public function delete($barang_kode){
+        $barang_kode = array('barang_kode' => $barang_kode);
+        $this->load->model('v');
+        $this->v->Delete('barang', $barang_kode);
+        redirect(base_url('barang'),'refresh');
+    }
 
     // fungsi untuk upload image
     private function upload_image($name, $address)

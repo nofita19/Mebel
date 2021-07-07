@@ -58,7 +58,6 @@
 											<td><strong>No</strong></td>
 											<td><strong>Tanggal Bayar</strong></td>
 											<td><strong>Harga</strong></td>
-											<td><strong>Dp</strong></td>
 											<td><strong>Bayar</strong></td>
 											<td><strong>Status Bayar</strong></td>
 										</tr>
@@ -68,12 +67,11 @@
 												<td><?= $no++ ?></td>
 										        <td><?= $penjualan->tanggal ?></td>
 												<td>Rp <?= number_format($penjualan->harga, 0, ',', '.') ?></td>
-												<td><?= '0'?></td>
 											<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
 												<td><?= 'Lunas' ?></td>
 											</tr>
 										<?php 
-                                           } else if ($penjualan->id_jenis_pembayaran==3) { 
+                                           } else if ($penjualan->id_jenis_pembayaran==2) { 
 											  $bayar= $penjualan->total/4; 
 										  ?>
 										  <a href="<?php echo base_url('Pembayaran/proses_tambah'."/".$penjualan->nomor_faktur."/".$bayar) ?>" class="btn btn-success btn-sm btn-show-add">
@@ -86,20 +84,17 @@
 											<td><strong>No</strong></td>
 											<td><strong>Tanggal Bayar</strong></td>
 											<td><strong>Harga</strong></td>
-											<td><strong>Dp</strong></td>
 											<td><strong>Total</strong></td>
 											<td><strong>Bayar</strong></td>
 											<td><strong>Status Bayar</strong></td>
 										</tr>
-									</thead>
 									<tbody>
 											<tr>
 												<td><?= $no++ ?></td>
 										        <td><?= $penjualan->tanggal ?></td>
 												<td>Rp <?= number_format($penjualan->harga, 0, ',', '.') ?></td>
-												<td><?= '0'?></td>
-											<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
-											<td>Rp <?= number_format($bayar, 0, ',', '.') ?></td>
+												<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
+												<td>Rp <?= number_format($bayar, 0, ',', '.') ?></td>
 											<?php 
                                             if ( $penjualan->total==1) { ?>
 												<td><?= 'Lunas' ?></td><?php 
@@ -109,6 +104,7 @@
 											</tr>
 										<?php } ?>
 									</tbody>
+									
 								</table>
 							</div>
 						</div>
