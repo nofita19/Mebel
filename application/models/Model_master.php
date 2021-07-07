@@ -71,27 +71,95 @@ class Model_master extends CI_Model {
       $end_month = $month[$count];
 
       if($start_month > $end_month) {
-          $date = (date("Y") - 1)."-".$start_month;
+          $tanggal = (date("Y") - 1)."-".$start_month;
       } else {
-          $date = date("Y")."-".$start_month;
+          $tanggal = date("Y")."-".$start_month;
       }
 
-      $this->db->select("transaksi_pembelian.*, MONTH(tanggal)");
+      $this->db->select("transaksi_pembelian.*, MONTH(tanggal) as tanggal");
       $this->db->group_by("MONTH(tanggal)");
-      $this->db->where("tanggal >=",$date);
-      return $this->db->get("transaksi_pembelian");
-      
+      $this->db->where("tanggal >=",$tanggal);
+      return $this->db->get("transaksi_pembelian"); 
   }
+
+  function get_graphh($month) {
+
+    $count = count($month) - 1;
+    $start_month = $month[0];
+    $end_month = $month[$count];
+
+    if($start_month > $end_month) {
+        $date = (date("Y") - 1)."-".$start_month;
+    } else {
+        $date = date("Y")."-".$start_month;
+    }
+
+    $this->db->select("transaksi_penjualan.*, MONTH(tanggal) as tanggal");
+    $this->db->group_by("MONTH(tanggal)");
+    $this->db->where("tanggal >=",$date);
+    return $this->db->get("transaksi_penjualan"); 
+}
 
   public function graph()
 	{
 		$data = $this->db->query("SELECT * from transaksi_pembelian");
 		return $data->result();
 	}
+  
 
   function sum()
     {
         $query = $this->db->query("SELECT SUM(total) as grand from transaksi_pembelian");
         return $query->result();
     }
+
+    function count()
+    {
+      $this->db->select("Count(total) as grandtotal");
+      $grandtotal = $this->db->get_where("transaksi_penjualan")->row();
+        if($grandtotal) {
+          return $grandtotal->grandtotal;
+      } else {
+          return 0;
+      }
+    }
+
+    function countt()
+    {
+      $this->db->select("Count(total) as grandtotal");
+      $grandtotal = $this->db->get_where("transaksi_pembelian")->row();
+        if($grandtotal) {
+          return $grandtotal->grandtotal;
+      } else {
+          return 0;
+      }
+    }
+
+
+    function get_today_income() {
+      $date = date("Y-m-d");
+
+      $this->db->select("SUM(total) as income,DATE(tanggal)");
+      $this->db->group_by("tanggal");
+      $income = $this->db->get_where("transaksi_penjualan",["DATE(tanggal)" => $date])->row();
+      if($income) {
+          return $income->income;
+      } else {
+          return 0;
+      }
+  }
+
+  function get_today_incoma() {
+    $date = date("Y-m-d");
+
+    $this->db->select("SUM(total) as incoma,DATE(tanggal)");
+    $this->db->group_by("tanggal");
+    $incoma = $this->db->get_where("transaksi_pembelian",["DATE(tanggal)" => $date])->row();
+    if($incoma) {
+        return $incoma->incoma;
+    } else {
+        return 0;
+    }
+  }
+
 }

@@ -23,6 +23,7 @@ class Pembayaran extends CI_Controller {
 		$data['nomor_faktur'] = $this->uri->segment('3');
 		$data['bayar'] = $this->uri->segment('4');
 		$data['title'] = "Data Pembayaran";
+        $data['data_angsuran'] = $this->m_penjualan->hitung_data_angsuran($data['nomor_faktur']);
         $this->form_validation->set_rules('kode_angsuran' , 'kode_angsuran' , 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view("template/header",$data);
@@ -51,7 +52,7 @@ class Pembayaran extends CI_Controller {
         }
 	}
 
-	public function tambah_cicilan(){
+	public function tambah_cicilan($nomor_faktur){
 		$data['nomor_faktur'] = $this->uri->segment('3');
 		$data['bayar'] = $this->uri->segment('4');
 		$data['title'] = "Data Pembayaran";
@@ -68,7 +69,7 @@ class Pembayaran extends CI_Controller {
 		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
 			Berhasil Menambahkan Data !
 		</div>');
-		redirect('penjualan');
+		redirect(site_url('penjualan/detail/'. $nomor_faktur));
 		} else {
 			$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
 				Gagal Menambahkan Data!

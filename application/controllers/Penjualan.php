@@ -111,8 +111,12 @@ class Penjualan extends CI_Controller {
         $data_penjualan['nama_pembeli']= $this->input->post('nama_pembeli_hidden');
         $data_penjualan['alamat_pembeli'] = $this->input->post('alamat_pembeli_hidden');
         $data_penjualan['no_telp']= $this->input->post('no_telp_hidden');
-        $data_penjualan['foto_ktp' ]= $this->_uploadImage();
-        $data_penjualan['total'] = $this->input->post('Grand_Total');
+        $data_penjualan['foto_ktp']= $this->_uploadImage();
+		if (!$this->input->post('Grand_Total')) {
+			$data_penjualan['total'] = $this->input->post('total_hidden');
+		} else {
+			$data_penjualan['total'] = $this->input->post('Grand_Total');
+		}
 
 		$data_detail_penjualan = [];
 
@@ -141,6 +145,8 @@ class Penjualan extends CI_Controller {
 		$this->data['penjualan'] = $this->m_penjualan->lihat_nomor_faktur($nomor_faktur);
 		$this->data['all_detail_penjualan'] = $this->m_detail_penjualan->lihat_nomor_faktur($nomor_faktur);
 		$this->data['no'] = 1;
+		$this->data['data_angsuran'] = $this->m_penjualan->data_angsuran($nomor_faktur);
+		$this->data['hitung_data_angsuran'] = $this->m_penjualan->hitung_data_angsuran($nomor_faktur);
 
         $this->load->view("template/header", $this->data);
 		$this->load->view('penjualandetail', $this->data);
@@ -238,7 +244,7 @@ class Penjualan extends CI_Controller {
 		if ($this->upload->do_upload('foto_ktp_hidden')) {
 			return $this->upload->data("file_name");
 		}
-		
 		return "default.jpg";
 	}
+	
 }

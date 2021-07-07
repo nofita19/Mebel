@@ -119,12 +119,12 @@ if(!isset($authPage)) {
                         </a>
 
                         <div class="user-menu dropdown-menu">
-
+<!-- 
                             <a class="nav-link" href="<?=base_url("setting/change_password");?>"><i class="fa fa-key"></i> Ganti Password</a>
 
-                            <a class="nav-link" href="<?=base_url("setting/shop_info");?>"><i class="fa fa-cog"></i> Pengaturan</a>
+                            <a class="nav-link" href="<?=base_url("setting/shop_info");?>"><i class="fa fa-cog"></i> Pengaturan</a> -->
 
-                            <a class="nav-link" href="<?=base_url("auth/logout");?>"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="<?=base_url("login/logout");?>"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
                 </div>

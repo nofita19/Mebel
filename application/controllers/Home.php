@@ -10,12 +10,19 @@ class Home extends CI_Controller{
 
     public function index()
     {
+        $data = [
+            "today_income" => $this->v->get_today_income(),
+            "today_incoma" => $this->v->get_today_incoma(),
+            "total_transaksipenjualan" => $this->v->count(),
+            "total_transaksipembelian" => $this->v->countt()
+        ];
         $now = date("m");
 
         $arrayTitle = [];
         $before = $now - 5;
         $arrayNumber = [];
         $arrayValuepembelian = [];
+        $arrayValuepenjualan = [];
     
         $month = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
     
@@ -29,11 +36,12 @@ class Home extends CI_Controller{
             }
             $arrayNumber[] = str_pad($temp,2,0,STR_PAD_LEFT);
             $arrayValuepembelian[] = 0;
+            $arrayValuepenjualan[] = 0;
         }
     
         
         $data1 = $this->v->get_graph($arrayNumber)->result();
-        // $data2 = $this->v->get_graph($arrayNumber,"service")->result();
+        $data2 = $this->v->get_graphh($arrayNumber)->result();
     
         foreach($data1 as $row) {
             $key = array_search(str_pad($row->tanggal,2,0,STR_PAD_LEFT),$arrayNumber);
@@ -41,13 +49,14 @@ class Home extends CI_Controller{
             // die;
             $arrayValuepembelian[$key] = $row->total;
         }
-        // foreach($data2 as $row) {
-        //     $key = array_search(str_pad($row->date,2,0,STR_PAD_LEFT),$arrayNumber);
-        //     $arrayValueService[$key] = $row->total;
-        // }
+        foreach($data2 as $row) {
+            $key = array_search(str_pad($row->tanggal,2,0,STR_PAD_LEFT),$arrayNumber);
+            $arrayValuepenjualan[$key] = $row->total;
+        }
 
         $data["title"] = $arrayTitle;
         $data["valuepembelian"] = $arrayValuepembelian;
+        $data["valuepenjualan"] = $arrayValuepenjualan;
         // var_dump($data);
         // die;
         $this->load->view('template/header',$data);

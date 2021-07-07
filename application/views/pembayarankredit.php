@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <h1 class="h3 mb-2 text-gray-800">Pembayaran</h1>
-  <form action="<?= base_url('Pembayaran/tambah_cicilan') ?>" method="post" enctype="multipart/form-data">
+  <form action="<?= base_url('Pembayaran/tambah_cicilan/'. $nomor_faktur) ?>" method="post" enctype="multipart/form-data">
 
     <div class="card shadow mb-4">
       <div class="card-body">
@@ -14,17 +14,17 @@
                     <input class="form-control" type="hidden" disabled  name="kode_angsuran">
                   <div class="form-group">
                     <label>Nomor Faktur</label>
-                    <input class="form-control" type="text" id="nomor_faktur" name="nomor_faktur" value="<?= $nomor_faktur ?>" required>
+                    <input class="form-control" type="text" id="nomor_faktur" name="nomor_faktur" value="<?= $nomor_faktur ?>" readonly>
                   </div>
                   <div class="form-group">
                     <label>Angsuran Ke</label>
-                    <input class="form-control" type="text" id="angsuran_ke" name="angsuran_ke" required>
+                    <input class="form-control" type="text" id="angsuran_ke" name="angsuran_ke" value="<?= $data_angsuran + 1 ?>" readonly>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label>Bayar</label>
-                    <input class="form-control" type="number"  id="bayar" name="bayar" value="<?= $bayar ?>" required>
+                    <input class="form-control" type="text" id="bayar" name="bayar" value="Rp <?= number_format($bayar, 0, ',', '.') ?>" readonly>
                   </div>
                   <div class="form-group">
                     <label>Tanggal</label>
@@ -36,7 +36,7 @@
                     </span>
                     <span class="text">Kirim Data</span>
                   </button>
-                  <a href="<?= base_url('Penjualan') ?>" class="btn btn-danger btn-icon-split">
+                  <a href="<?= base_url('Penjualan/detail/'. $nomor_faktur) ?>" class="btn btn-danger btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fa fa-reply"></i>
                     </span>

@@ -9,7 +9,7 @@ class Model_detail_penjualan extends CI_Model {
 
 	public function lihat_nomor_faktur($nomor_faktur){
 		// return $this->db->get_where($this->_table, ['nomor_faktur' => $nomor_faktur])->result();
-		$query = $this->db->query("SELECT a.* , b.* , c.* from transaksi_penjualan  a join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode where a.nomor_faktur='$nomor_faktur' ");
+		$query = $this->db->query("SELECT a.* , b.* , c.* , d.* from transaksi_penjualan  a join jenis_pembayaran d on a.id_jenis_pembayaran=d.id_jenis_pembayaran join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode where a.nomor_faktur='$nomor_faktur' ");
         return $query->result();
 	}
 

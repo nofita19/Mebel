@@ -66,4 +66,25 @@ class Model_penjualan extends CI_Model {
       $res = $this->db->delete($table, $where); // Kode ini digunakan untuk menghapus record yang sudah ada
       return $res;
       }
+
+	  public function data_angsuran($nomor_faktur)
+	{
+		$this->db->select('*');
+		$this->db->from('transaksi_penjualan');
+		$this->db->join('angsuran', 'transaksi_penjualan.nomor_faktur = angsuran.nomor_faktur');
+		$this->db->where('transaksi_penjualan.nomor_faktur', $nomor_faktur);
+		return $this->db->get()->result_array();
+
+		//return $this->db->get_where($this->_table, ['nomor_faktur' => $nomor_faktur])->row();
+	}
+
+	public function hitung_data_angsuran($nomor_faktur)
+	{
+		$this->db->select('*');
+		$this->db->from('transaksi_penjualan');
+		$this->db->join('angsuran', 'transaksi_penjualan.nomor_faktur = angsuran.nomor_faktur');
+		$this->db->where('transaksi_penjualan.nomor_faktur', $nomor_faktur);
+		return $this->db->get()->num_rows();
+	}
+
 }

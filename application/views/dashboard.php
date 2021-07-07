@@ -26,6 +26,7 @@
                                 <i class="fa fa-dollar"></i>
                             </div>
                             <h4 class="mb-0">
+                                <span class="count"><?='Rp. ' ;?> <?=($today_income);?></span>
                             </h4>
                             <p class="text-light">Pendapatan Hari Ini</p>
                         </div>
@@ -38,6 +39,7 @@
                                 <i class="fa fa-share"></i>
                             </div>
                             <h4 class="mb-0">
+                                <span class="count"><?='Rp. ' ;?> <?=($today_incoma);?></span>
                             </h4>
                             <p class="text-light">Pengeluaran Hari Ini</p>
                         </div>
@@ -50,6 +52,7 @@
                                 <i class="fa fa-cogs"></i>
                             </div>
                             <h4 class="mb-0">
+                                <span class="count"><?=($total_transaksipenjualan);?><?=' Item'?></span>
                             </h4>
                             <p class="text-light">Total Penjualan</p>
                         </div>
@@ -62,6 +65,7 @@
                                 <i class="fa fa-cogs"></i>
                             </div>
                             <h4 class="mb-0">
+                                <span class="count"><?=($total_transaksipembelian);?><?=' Item'?></span>
                             </h4>
                             <p class="text-light">Total Pembelian</p>
                         </div>
@@ -88,7 +92,7 @@
                             Grafik Penjualan 
                         </div>
                         <div class="card-body">
-                            <!-- <canvas id="myChart2" width="400" height="100"></canvas> -->
+                            <canvas id="myChart2" width="400" height="100"></canvas>
                         </div>
                     </div>
                 </div>
@@ -96,7 +100,7 @@
         </div>
                 <script>
                     var ctx1 = document.getElementById('myChart1').getContext('2d');
-                    // var ctx2 = document.getElementById('myChart2').getContext('2d');
+                    var ctx2 = document.getElementById('myChart2').getContext('2d');
                     var myChart1 = new Chart(ctx1, {
                         type: 'line',
                         data: {
@@ -106,6 +110,28 @@
                                 data: [<?=implode(",",$valuepembelian);?>],
                                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                                 borderColor: "rgba(255, 99, 132, 1)",
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    var myChart2 = new Chart(ctx2, {
+                        type: 'line',
+                        data: {
+                            labels: [<?=implode(",",$title);?>],
+                            datasets: [{
+                                label: 'Penjualan',
+                                data: [<?=implode(",",$valuepenjualan);?>],
+                                backgroundColor: "rgba(99, 255, 132, 0.2)",
+                                borderColor: "rgba(99, 255, 132, 1)",
                                 borderWidth: 1
                             }]
                         },
