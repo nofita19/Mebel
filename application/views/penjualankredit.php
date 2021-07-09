@@ -31,7 +31,7 @@
 </div>
 <input type="hidden" name="barang_nama" value="" readonly class="form-control">
 <div class="form-group col-2">
-<label>Jenis Bahan</label>
+<label>Jenis Barang</label>
 <input type="text" name="jenis_bahan" value="" readonly class="form-control">
 </div>
 <div class="form-group col-2">
@@ -80,7 +80,7 @@
 			<thead>
 				<tr>
 					<td width="20%">Nama Barang</td>
-					<td width="15%">Jenis Bahan</td>
+					<td width="15%">Jenis Barang</td>
 					<td width="16%">Type Barang</td>
 					<td width="15%">Harga</td>
 					<td width="15%">Jumlah</td>
