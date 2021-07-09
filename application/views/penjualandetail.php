@@ -103,7 +103,7 @@
 										<span class="text">Bayar Kredit</span>
 										</a>
 									<?php } elseif ($hitung_data_angsuran <=9  && $penjualan->id_jenis_pembayaran == 2) {?>
-										<a href="<?php echo base_url('Pembayaran/proses_tambah' . "/" . $penjualan->nomor_faktur . "/" . $bayar) ?>" class="btn btn-success btn-sm btn-show-add">
+										<a href="<?php echo base_url('Pembayaran/proses_tambah' . "/" . $penjualan->nomor_faktur . "/" . $bayarbulanan) ?>" class="btn btn-success btn-sm btn-show-add">
 										<span class="icon text-white-50">
 										<i class="fa fa-plus"></i>
 										</span>
