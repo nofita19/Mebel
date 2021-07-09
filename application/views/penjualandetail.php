@@ -92,6 +92,7 @@
 								<?php
 									} else {
 										$bayar = $penjualan->total / 4;
+										$bayarbulanan = $penjualan->total / 10;
 								?>
 									<?php 
 									if ($hitung_data_angsuran <= 3 && $penjualan->id_jenis_pembayaran == 3) {?>
@@ -108,8 +109,7 @@
 										</span>
 										<span class="text">Bayar Kredit</span>
 										</a>
-									<?php }?>					
-								<?php } ?>
+									<?php }?>		
 								<tr>
 									<td class="text-center"><strong>No</strong></td>
 									<td class="text-center"><strong>Tanggal Bayar</strong></td>
@@ -125,12 +125,24 @@
 										<tr>
 											<td><?= $no++ ?></td>
 											<td><?= $data['tanggal'] ?></td>
+									<?php
+									if ($penjualan->id_jenis_pembayaran == 3) { ?>
 											<td>Rp <?= number_format($bayar, 0, ',', '.') ?></td>
+									<?php } else if ($penjualan->id_jenis_pembayaran == 2) {?>
+											<td>Rp <?= number_format($bayarbulanan, 0, ',', '.') ?></td>
+									<?php } ?> 
+									
 											<td class="text-center"><?= $data['angsuran_ke'] ?></td>
+									<?php
+									if ($penjualan->id_jenis_pembayaran == 3) { ?>
 											<td>Rp <?= number_format($bayar, 0, ',', '.') ?></td>
+									<?php } else if ($penjualan->id_jenis_pembayaran == 2) {?>
+											<td>Rp <?= number_format($bayarbulanan, 0, ',', '.') ?></td>
+									<?php } ?> 
 											<td class="text-center"><span class="badge badge-success text-center">Lunas</span></td>
 										</tr>
-									<?php } ?>
+									<?php } ?>			
+								<?php } ?>
 								</tbody>
 							</table>
 						</div>
