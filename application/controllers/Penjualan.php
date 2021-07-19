@@ -208,7 +208,7 @@ class Penjualan extends CI_Controller {
         $bulanakhir = htmlspecialchars($this->input->post('bulanakhir', true));
 
         $data['bybulan'] = $this->m_penjualan->filterbybulan($tahun1, $bulanawal1, $bulanakhir);
-        $data['sum'] = $this->m_penjualan->sum();
+        $data['sum'] = $this->m_penjualan->sumbulan($tahun1, $bulanawal1, $bulanakhir);
         $this->load->view('report/laporan_by_bulan_penjualan', $data);
     }
 

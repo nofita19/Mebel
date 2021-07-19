@@ -113,6 +113,12 @@ class Model_master extends CI_Model {
         return $query->result();
     }
 
+    function sumbulan($tahun1, $bulanawal, $bulanakhir)
+    {
+        $query = $this->db->query("SELECT SUM(total) as grand from transaksi_pembelian  where YEAR(tanggal) = '$tahun1' and MONTH(tanggal) BETWEEN '$bulanawal' and '$bulanakhir' ORDER BY tanggal");
+        return $query->result();
+    }
+
     function count()
     {
       $this->db->select("Count(total) as grandtotal");
