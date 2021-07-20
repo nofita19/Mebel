@@ -220,7 +220,7 @@ class Penjualan extends CI_Controller {
         $tahun2 = htmlspecialchars($this->input->post('tahun2', true));
 
         $data['bytahun'] = $this->m_penjualan->filterbytahun($tahun2);
-        $data['sum'] = $this->m_penjualan->sum();
+        $data['sum'] = $this->m_penjualan->sum($tahun2);
         $this->load->view('report/laporan_by_tahun_penjualan', $data);
     }
 

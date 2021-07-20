@@ -107,9 +107,9 @@ class Model_master extends CI_Model {
 	}
   
 
-  function sum()
+  function sum($tahun2)
     {
-        $query = $this->db->query("SELECT SUM(total) as grand from transaksi_pembelian");
+        $query = $this->db->query("SELECT SUM(total) as grand from transaksi_pembelian where YEAR(tanggal) = '$tahun2' ORDER BY tanggal ASC");
         return $query->result();
     }
 

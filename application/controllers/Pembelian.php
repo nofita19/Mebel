@@ -167,7 +167,7 @@ class Pembelian extends CI_Controller {
         $tahun2 = htmlspecialchars($this->input->post('tahun2', true));
 
         $data['bytahun'] = $this->v->filterbytahun($tahun2);
-        $data['sum'] = $this->v->sum();
+        $data['sum'] = $this->v->sum($tahun2);
         $this->load->view('report/laporan_by_tahun_pembelian', $data);
     }
 

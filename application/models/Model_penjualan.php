@@ -55,9 +55,9 @@ class Model_penjualan extends CI_Model {
         return $query->result();
     }
 
-    function sum()
+    function sum($tahun2)
     {
-        $query = $this->db->query("SELECT SUM(total) as grand from transaksi_penjualan");
+        $query = $this->db->query("SELECT SUM(a.total) as grand from transaksi_penjualan a join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode where YEAR(a.tanggal) = '$tahun2' ORDER BY a.tanggal ASC");
         return $query->result();
     }
 
