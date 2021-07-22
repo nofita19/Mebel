@@ -18,7 +18,7 @@ class M_barang extends CI_Model{
 	}
 
 	public function lihat_stok(){
-		$query = $this->db->get_where($this->_table, 'stok > 1');
+		$query = $this->db->get_where($this->_table, 'stok >= 1');
 		return $query->result();
 	}
 
