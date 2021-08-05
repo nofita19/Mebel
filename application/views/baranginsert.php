@@ -11,7 +11,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-lg-6">
-                 <div class="form-group">
+                  <div class="form-group">
                     <label>Kode Barang</label>
                     <input class="form-control" type="text" id="barang_kode" name="barang_kode" required>
                   </div>
@@ -76,7 +76,7 @@
                   </div>
                   <div class="form-group">
                     <label>Foto Barang</label>
-                    <input class="form-control" type="file" id="foto" name="foto">
+                    <input class="form-control" type="file" id="foto" name="foto" required oninvalid="this.setCustomValidity('Foto Barang Tidak Boleh Kosong')" oninput="setCustomValidity('')">
                   </div>
                   <button type="submit" class="btn btn-info btn-icon-split">
                     <span class="icon text-white-50">
