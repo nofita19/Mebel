@@ -1,56 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Berdasarkan bulan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
-    
-<style>
-  .center {
-  margin-left: auto;
-  margin-right: auto;
-    }
-@page { size: A4 }
-  
-    h1 {
-        font-weight: bold;
-        font-size: 20pt;
-        text-align: center;
-    }
-  
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-  
-    .table th {
-        padding: 8px 8px;
-        border:1px solid #000000;
-        text-align: center;
-    }
-  
-    .table td {
-        padding: 3px 3px;
-        border:1px solid #000000;
-    }
-  
-    .text-center {
-        text-align: center;
-    }
-</style>
+
+    <style>
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @page {
+            size: A4
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 20pt;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table th {
+            padding: 8px 8px;
+            border: 1px solid #000000;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 3px 3px;
+            border: 1px solid #000000;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body class="A4">
     <center>
         <h2>LAPORAN PENJUALAN</h2>
         <h4>Berdasarkan Periode Bulan</h4>
+        <?= $tanggal; ?>
     </center>
 
     <br />
 
     <table border="1" class="table">
-    <tr>
+        <tr>
             <th>Nomor Faktur</th>
             <th>Nama Barang</th>
             <th>Jenis Barang</th>
@@ -85,13 +90,13 @@
             </tr>
         <?php }; ?>
         <?php
-            foreach ($sum as $r) {
-            ?>
-                <tr>
-                    <td colspan="9" align="right"><strong>Jumlah Total</strong></td>
-                    <td colspan="1" align="right"><strong><?= $r->grand;?> </strong></td>
-                </tr>
-            <?php }; ?>
+        foreach ($sum as $r) {
+        ?>
+            <tr>
+                <td colspan="9" align="right"><strong>Jumlah Total</strong></td>
+                <td colspan="1" align="right"><strong><?= $r->grand; ?> </strong></td>
+            </tr>
+        <?php }; ?>
     </table>
 
     <script>
