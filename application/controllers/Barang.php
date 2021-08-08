@@ -47,12 +47,6 @@ class Barang extends CI_Controller
             $this->load->view('baranginsert', $data);
             $this->load->view("template/footer");
         } else {
-            // $foto = $_FILES['foto']['name'];
-            // $config['allowed_types'] = 'jpg|png|gif|jpeg';
-            // $config['max_size'] = '2048';
-            // $config['upload_path'] = './img/barang/';
-            // $this->load->library('upload' , $config);
-            // if ($this->upload->do_upload('foto')) {
             $image = $this->upload_image('foto', './img/barang/');
             $tambah = $this->v->insert("barang", array(
                 'barang_kode' => $this->input->post('barang_kode'),
@@ -65,9 +59,6 @@ class Barang extends CI_Controller
                 'biaya_distribusi' => $this->input->post('biaya_distribusi'),
                 'biaya_lainlain' => $this->input->post('biaya_lainlain'),
                 'keuntungan' => $this->input->post('keuntungan'),
-                // 'harga_tunai' =>$this->input->post('harga_tunai'),
-                // 'harga_kredit_bulananan' =>$this->input->post('harga_kredit_bulananan'),
-                // 'harga_kredit_musiman' =>$this->input->post('harga_kredit_musiman'),
                 'stok' => $this->input->post('stok'),
                 'foto' => $image
             ));
@@ -83,12 +74,6 @@ class Barang extends CI_Controller
                 </div>');
                 redirect('barang');
             }
-            // } else {
-            //     $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">'
-            //     . $this->upload->display_errors() .
-            //     '</div>');
-            //     redirect('barang');
-            // }
         }
     }
 

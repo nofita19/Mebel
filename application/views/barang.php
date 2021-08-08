@@ -4,6 +4,8 @@
                     <div class="page-title">
                         <h1> Data Barang</h1>
                     </div>
+        <div class="row"><?= $this->session->flashdata('pesan') ?>
+                </div>
                 </div>
             </div>
             <div class="col-sm-8">
