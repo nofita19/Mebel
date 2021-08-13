@@ -17,6 +17,15 @@
             </div>
         </div>
 
+<?php
+    $date = date('Y-m-d');
+    $data = $this->db->query("SELECT *, SUM(bayar) as bayar FROM angsuran WHERE tanggal='$date'")->result_array()[0];
+
+    $m = $this->db->query("SELECT *, SUM(total) as total FROM transaksi_penjualan WHERE id_jenis_pembayaran='1' AND tanggal='$date'")->result_array()[0];
+
+    $n = $this->db->query("SELECT *, SUM(dp) as dp_total FROM transaksi_penjualan WHERE id_jenis_pembayaran != '1' AND tanggal='$date'")->result_array()[0];
+?>
+
         <div class="content mt-3">
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
@@ -26,7 +35,7 @@
                                 <i class="fa fa-dollar"></i>
                             </div>
                             <h4 class="mb-0">
-                                <span class="count"><?='Rp. ' ;?> <?=($today_income);?></span>
+                                <span class="count"><?='Rp. ' ;?> <?=number_format($m['total'] + $data['bayar'] + $n['dp_total'],2,',','.');?></span>
                             </h4>
                             <p class="text-light">Pendapatan Hari Ini</p>
                         </div>

@@ -34,6 +34,7 @@ class Pembayaran extends CI_Controller {
                 'kode_angsuran' => $this->input->post('kode_angsuran', true),
                 'nomor_faktur' => $this->input->post('nomor_faktur', true),
                 'angsuran_ke' => $this->input->post('angsuran_ke', true),
+                'sisa_angsuran' => "",
                 'bayar' => $this->input->post('bayar', true),
                 'tanggal' => $this->input->post('tanggal', true),
             ];
@@ -42,7 +43,9 @@ class Pembayaran extends CI_Controller {
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Berhasil Menambahkan Data !
             </div>');
-            redirect('penjualan');
+
+            print_r($data_bayar);
+            // redirect('penjualan');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                     Gagal Menambahkan Data!

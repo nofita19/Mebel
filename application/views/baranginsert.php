@@ -1,6 +1,12 @@
 <div class="container-fluid">
 
   <h1 class="h3 mb-2 text-gray-800">Tambah Data Barang</h1>
+  <?php 
+  if (isset($_SESSION['msg'])) {
+    echo "<div class='alert alert-" . $_SESSION['msg'][0] . "'>" . "<b>" . strtoupper($_SESSION['msg'][0]) . " </b>" . $_SESSION['msg'][1] . "</div>";
+    unset($_SESSION['msg']);
+  }
+  ?>
   <form action="" method="post" enctype="multipart/form-data">
 
     <div class="card shadow mb-4">
@@ -11,9 +17,9 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-lg-6">
-                  <div class="form-group">
+                 <div class="form-group">
                     <label>Kode Barang</label>
-                    <input class="form-control" type="text" id="barang_kode" name="barang_kode" required>
+                    <input class="form-control" type="text" id="barang_kode" onkeyup="isi_otomatis()" name="barang_kode" required>
                   </div>
                   <div class="form-group">
                     <label>Nama Barang</label>
@@ -29,7 +35,7 @@
                   </div>
                   <div class="form-group">
                     <label>Harga Asli</label>
-                    <input class="form-control" type="number" id="harga_asli" name="harga_asli" required>
+                    <input class="form-control" type="number" id="harga" name="harga_asli" required>
                   </div>
                   <div class="form-group">
                     <label>Biaya Produksi</label>
@@ -76,7 +82,7 @@
                   </div>
                   <div class="form-group">
                     <label>Foto Barang</label>
-                    <input class="form-control" type="file" id="foto" name="foto" required oninvalid="this.setCustomValidity('Foto Barang Tidak Boleh Kosong')" oninput="setCustomValidity('')">
+                    <input class="form-control" type="file" id="foto" name="foto" required>
                   </div>
                   <button type="submit" class="btn btn-info btn-icon-split">
                     <span class="icon text-white-50">
@@ -110,3 +116,28 @@
 
 <!-- /.container-fluid -->
 </form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    function isi_otomatis(){
+        var nim = $("#barang_kode").val();
+        $.ajax({
+            url: 'getdataotomatis',
+            data: "kode_barang="+nim ,
+        }).success(function (data) {
+            var json = data,
+            obj = JSON.parse(json);
+            $('#barang_nama').val(obj.barang_nama);
+            $('#jenis_bahan').val(obj.jenis_bahan);
+            $('#harga').val(obj.harga_asli);
+            $('#type_barang').val(obj.type_barang);
+            $('#biaya_produksi').val(obj.biaya_produksi);
+            $('#biaya_tukang').val(obj.biaya_tukang);
+            $('#biaya_distribusi').val(obj.biaya_distribusi);
+            $('#biaya_lainlain').val(obj.biaya_lainlain);
+            $('#keuntungan').val(obj.keuntungan);
+            $('#stok').val(obj.stok);
+        });
+    }
+</script>

@@ -12,7 +12,7 @@ class Model_master extends CI_Model {
       public function getDatapenjualan($tb)
       {
         // return $query = $this->db->query("SELECT * FROM $tb a join barang c on a.barang_kode=c.barang_kode")->result_array();
-        return $query = $this->db->query("SELECT * FROM $tb a join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode ")->result_array();
+        return $query = $this->db->query("SELECT * FROM $tb a join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode")->result_array();
       }
       public function getDetailData($tb , $column , $id){
         return $query = $this->db->query("SELECT * FROM $tb  WHERE $column = '$id' GROUP BY $column")->result_array();
@@ -48,7 +48,7 @@ class Model_master extends CI_Model {
 
     function gettahun()
     {
-        $query = $this->db->query("SELECT YEAR(tanggal) AS tahun FROM transaksi_pembelian GROUP BY YEAR(tanggal) ORDER BY YEAR(tanggal) ASC");
+        $query = $this->db->query("SELECT YEAR(tanggal) AS tahun FROM transaksi_penjualan GROUP BY YEAR(tanggal) ORDER BY YEAR(tanggal) ASC");
         return $query->result();
     }
 

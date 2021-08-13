@@ -11,7 +11,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-lg-6">
-                    <input class="form-control" type="hidden" disabled  name="kode_angsuran">
+                    <input class="form-control" type="hidden" value="<?= $data_angsuran + 1 ?>" name="kode_angsuran">
                   <div class="form-group">
                     <label>Nomor Faktur</label>
                     <input class="form-control" type="text" id="nomor_faktur" name="nomor_faktur" value="<?= $nomor_faktur ?>" readonly>
@@ -24,7 +24,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label>Bayar</label>
-                    <input class="form-control" type="text" id="bayar" name="bayar" value="Rp <?= number_format($bayar, 0, ',', '.') ?>" readonly>
+                    <input class="form-control" type="text" id="bayar" name="bayar" value="<?=$bayar ?>" readonly>
                   </div>
                   <div class="form-group">
                     <label>Tanggal</label>

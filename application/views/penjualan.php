@@ -20,7 +20,7 @@
 
         <div class="content mt-3">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header">   
                 <a href="<?php echo base_url('penjualan/tambahcash') ?>" class="btn btn-success btn-sm btn-show-add">
                     <span class="icon text-white-50">
                         <i class="fa fa-plus"></i>
@@ -42,10 +42,16 @@
 							<tr>
 								<th>#</th>
 								<th>Nomor Faktur</th>
-								<th>Nama Barang</th>
+								<!-- <th>Nama Barang</th>
+								<th>Jenis Barang</th>
+								<th>Type Barang</th> -->
 								<th>Nama Pembeli</th>
-								<th>Pembayaran</th>
+								<th>No Telp</th>
+								<th>Alamat</th>
+								<th>Jenis Pembayaran</th>
 								<th>Tanggal Penjualan</th>
+                                <th>Angsuran</th>
+                                <th>Sisa Angsuran</th>
 								<th style="width: 130px">Aksi</th>
 							</tr>
 						</thead>
@@ -58,8 +64,12 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $row['nomor_faktur'] ?></td>
-                                <td><?= $row['barang_nama'] ?></td>
+                                <!-- <td><?= $row['barang_nama'] ?></td>
+                                <td><?= $row['jenis_bahan'] ?></td>
+                                <td><?= $row['barang_nama'] ?></td> -->
                                 <td><?= $row['nama_pembeli'] ?></td>
+                                <td><?= $row['no_telp'] ?></td>
+                                <td><?= $row['alamat_pembeli'] ?></td>
                                 <td> <?php if ($row['id_jenis_pembayaran'] == '1') { ?>
                                     <span>Cash</span>
                                 <?php } elseif ($row['id_jenis_pembayaran'] == '2') { ?>
@@ -68,6 +78,29 @@
                                     <span>Kredit Musiman</span>
                                 <?php } ?></td>
                                 <td><?= $row['tanggal'] ?></td>
+                                <td>
+                                <?php if ($row['id_jenis_pembayaran'] == '1') { ?>
+                                    <span>0</span>
+                                <?php } elseif ($row['id_jenis_pembayaran'] == '2') { ?>
+                                    <span>10 Angsuran</span>
+                                <?php } elseif ($row['id_jenis_pembayaran'] == '3') { ?>
+                                    <span>4 Angsuran</span>
+                                <?php } ?>
+                                </td>
+                                <td>
+
+                                <?php if ($row['id_jenis_pembayaran'] == '1') { ?>
+                                    <span>0</span>
+                                <?php } elseif ($row['id_jenis_pembayaran'] == '2') { 
+                                    $bg = $this->db->query("SELECT COUNT(nomor_faktur) as angsuranx FROM angsuran WHERE nomor_faktur='$row[nomor_faktur]'")->result_array()[0];
+                                    echo 10 - $bg['angsuranx'];
+                                } elseif ($row['id_jenis_pembayaran'] == '3') { 
+                                    $bg = $this->db->query("SELECT COUNT(nomor_faktur) as angsuranx FROM angsuran WHERE nomor_faktur='$row[nomor_faktur]'")->result_array()[0];
+                                    echo 4 - $bg['angsuranx'];
+                                    
+                                }?>
+                                
+                                </td>
                                 <td>
 									<a href="<?= base_url() ;?>penjualan/detail/<?= $row['nomor_faktur']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
 									<!-- <a href="<?= base_url() ;?>penjualan/edit_data/<?= $row['nomor_faktur']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a> -->

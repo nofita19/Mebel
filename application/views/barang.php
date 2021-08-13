@@ -6,6 +6,13 @@
                     </div>
                 </div>
             </div>
+
+            <?php 
+                if (isset($_SESSION['msg'])) {
+                    echo "<div class='alert alert-".$_SESSION['msg'][0]."'>"."<b>".strtoupper($_SESSION['msg'][0])." </b>".$_SESSION['msg'][1]."</div>";
+                    unset($_SESSION['msg']);
+                }
+            ?>
             <div class="col-sm-8">
                 <div class="page-header float-right">
                     <div class="page-title">

@@ -31,7 +31,8 @@ class Login extends CI_Controller{
      
             redirect(base_url("Home"));
         }else{
-            echo "Username dan password salah !";
+            $_SESSION['msg'] = ['info', 'Username dan Password Salah !!!'];
+            redirect(base_url("Login"));
         }
     }
 

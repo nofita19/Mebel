@@ -53,10 +53,13 @@
 								<tr>
 									<td><strong>Jumlah Pembayaran</strong></td>
 									<td>:</td>
-									<td> Rp <?= number_format($penjualan->harga, 0, ',', '.') ?> </td>
+									<td> Rp <?=  $harga = $penjualan->harga * $penjualan->jumlah; number_format($harga, 0, ',', '.') ?> </td>
 									<td><strong>Lama Angsuran</strong></td>
 									<td>:</td>
 									<td><?= $penjualan->lama_angsuran ?> <?=' Kali Angsuran'?></td>
+									<td><strong>DP</strong></td>
+									<td>:</td>
+									<td>Rp.<?= number_format($penjualan->dp, 0, ',', '.') ?></td>
 								</tr>
 							</table>
 						</div>
@@ -77,8 +80,10 @@
 											<td><strong>No</strong></td>
 											<td><strong>Tanggal Bayar</strong></td>
 											<td><strong>Harga</strong></td>
+											<td><strong>Jumlah Pembelian</strong></td>
 											<td><strong>Bayar</strong></td>
 											<td><strong>Status Bayar</strong></td>
+											<td><strong>Bukti Pembayaran</strong></td>
 										</tr>
 								</thead>
 								<tbody>
@@ -86,8 +91,10 @@
 										<td><?= $no++ ?></td>
 										<td><?= $penjualan->tanggal ?></td>
 										<td>Rp <?= number_format($penjualan->harga, 0, ',', '.') ?></td>
+										<td> <?= $penjualan->jumlah ?></td>
 										<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
 										<td><?= 'Lunas' ?></td>
+										<td class="text-center"><span class="badge badge-success text-center"><a target="_blank" class="btn btn-success" style="color:white" href="<?php echo base_url()."Penjualan/CetakCash/".$penjualan->nomor_faktur ?>">Cetak</a></span></td>
 									</tr>
 								<?php
 									} else {
@@ -117,6 +124,7 @@
 									<td class="text-center"><strong>Angsuran ke-</strong></td>
 									<td class="text-center"><strong>Bayar</strong></td>
 									<td class="text-center"><strong>Status Bayar</strong></td>
+									<td class="text-center"><strong>Bukti Pembayaran</strong></td>
 								</tr>
 								<tbody>
 									<?php
@@ -134,14 +142,15 @@
 									
 											<td class="text-center"><?= $data['angsuran_ke'] ?></td>
 									<?php
-									if ($penjualan->id_jenis_pembayaran == 3) { ?>
-											<td>Rp <?= number_format($bayar, 0, ',', '.') ?></td>
-									<?php } else if ($penjualan->id_jenis_pembayaran == 2) {?>
-											<td>Rp <?= number_format($bayarbulanan, 0, ',', '.') ?></td>
-									<?php } ?> 
-											<td class="text-center"><span class="badge badge-success text-center">Lunas</span></td>
-										</tr>
-									<?php } ?>			
+										if ($penjualan->id_jenis_pembayaran == 3) { ?>
+												<td>Rp <?= number_format($bayar, 0, ',', '.') ?></td>
+										<?php } else if ($penjualan->id_jenis_pembayaran == 2) {?>
+												<td>Rp <?= number_format($bayarbulanan, 0, ',', '.') ?></td>
+										<?php } ?> 
+												<td class="text-center"><span class="badge badge-success text-center">Lunas</span></td>
+												<td class="text-center"><span class="badge badge-success text-center"><a target="_blank" class="btn btn-success" style="color:white" href="<?php echo base_url()."Penjualan/cetak/".$data['kode_angsuran'] ?>">Cetak</a></span></td>
+											</tr>
+										<?php } ?>			
 								<?php } ?>
 								</tbody>
 							</table>

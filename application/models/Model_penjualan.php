@@ -63,7 +63,7 @@ class Model_penjualan extends CI_Model {
 
 	function sumbulan($tahun1, $bulanawal, $bulanakhir)
     {
-        $query = $this->db->query("SELECT SUM(a.total) as grand from transaksi_penjualan a join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode where YEAR(a.tanggal) = '$tahun1' and MONTH(a.tanggal) BETWEEN '$bulanawal' and '$bulanakhir' ORDER BY a.tanggal ASC");
+        $query = $this->db->query("SELECT SUM(b.sub_total) as grand from transaksi_penjualan a join detail_penjualan b on a.nomor_faktur=b.nomor_faktur join barang c on b.barang_kode=c.barang_kode where YEAR(a.tanggal) = '$tahun1' and MONTH(a.tanggal) BETWEEN '$bulanawal' and '$bulanakhir' ORDER BY a.tanggal ASC");
         return $query->result();
     }
 

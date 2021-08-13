@@ -1,0 +1,227 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 10 Agu 2021 pada 17.05
+-- Versi server: 10.1.31-MariaDB
+-- Versi PHP: 7.2.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `mebel`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `angsuran`
+--
+
+CREATE TABLE `angsuran` (
+  `kode_angsuran` int(11) NOT NULL,
+  `nomor_faktur` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `angsuran_ke` int(11) NOT NULL,
+  `sisa_angsuran` int(11) NOT NULL,
+  `bayar` float(11,3) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `angsuran`
+--
+
+INSERT INTO `angsuran` (`kode_angsuran`, `nomor_faktur`, `angsuran_ke`, `sisa_angsuran`, `bayar`, `tanggal`) VALUES
+(2, 'PJ1628606589', 2, 0, 210000.000, '2021-08-10');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `barang`
+--
+
+CREATE TABLE `barang` (
+  `barang_kode` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `barang_nama` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `jenis_bahan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type_barang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `harga_asli` int(11) NOT NULL DEFAULT '0',
+  `biaya_produksi` int(11) NOT NULL,
+  `biaya_tukang` int(11) NOT NULL,
+  `biaya_distribusi` int(11) NOT NULL,
+  `biaya_lainlain` int(11) NOT NULL,
+  `keuntungan` int(11) NOT NULL,
+  `foto` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default.jpg',
+  `stok` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `barang`
+--
+
+INSERT INTO `barang` (`barang_kode`, `barang_nama`, `jenis_bahan`, `type_barang`, `harga_asli`, `biaya_produksi`, `biaya_tukang`, `biaya_distribusi`, `biaya_lainlain`, `keuntungan`, `foto`, `stok`) VALUES
+('lemari001', 'Lemari', 'Kayu', '2 Pintu', 1100000, 400000, 200000, 50000, 25000, 225000, 'cfff52b2b246d647668a3037b6cc20bf.jpg', 8),
+('Sprd001', 'Sprimbad', 'Amerika', 'No 1', 2200000, 0, 0, 50000, 0, 300000, '87038979af78a538c09fa4f29e3f5117.jpg', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail_penjualan`
+--
+
+CREATE TABLE `detail_penjualan` (
+  `id_detail_penjualan` int(5) NOT NULL,
+  `nomor_faktur` varchar(255) NOT NULL,
+  `barang_kode` varchar(255) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `sub_total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `detail_penjualan`
+--
+
+INSERT INTO `detail_penjualan` (`id_detail_penjualan`, `nomor_faktur`, `barang_kode`, `harga`, `jumlah`, `sub_total`) VALUES
+(1, 'PJ1628432952', 'br01', 84054, 2, 168108),
+(2, 'PJ1628432971', 'br06', 588269, 4, 2353076),
+(3, 'PJ1628433010', 'br11', 1000118, 3, 3000354),
+(4, 'PJ1628603806', 'br24', 241000, 2, 482000),
+(5, 'PJ1628604546', 'br01', 1084054, 1, 1084054),
+(6, 'PJ1628605240', 'br28', 562646, 0, 0),
+(7, 'PJ1628606521', 'lemari001', 2000000, 1, 2000000),
+(8, 'PJ1628606589', 'lemari001', 2500000, 1, 2500000),
+(9, 'PJ1628606771', 'Sprd001', 3550000, 2, 7100000);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenis_pembayaran`
+--
+
+CREATE TABLE `jenis_pembayaran` (
+  `id_jenis_pembayaran` int(11) NOT NULL,
+  `nama_pembayaran` varchar(110) NOT NULL,
+  `tambah_harga` int(11) NOT NULL,
+  `lama_angsuran` int(11) NOT NULL,
+  `nofak` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jenis_pembayaran`
+--
+
+INSERT INTO `jenis_pembayaran` (`id_jenis_pembayaran`, `nama_pembayaran`, `tambah_harga`, `lama_angsuran`, `nofak`) VALUES
+(1, 'Cash', 0, 0, ''),
+(2, 'Kredit Bulanan', 500000, 10, ''),
+(3, 'Kredit Musiman', 1000000, 4, '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_pembelian`
+--
+
+CREATE TABLE `transaksi_pembelian` (
+  `kode_pembelian` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nama_barang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `jenis_barang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type_barang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `harga` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_penjualan`
+--
+
+CREATE TABLE `transaksi_penjualan` (
+  `nomor_faktur` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id_jenis_pembayaran` int(11) NOT NULL COMMENT '1 = cash, 2= kredit bulanan, 3 = kredit musiman',
+  `nama_pembeli` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `alamat_pembeli` text COLLATE utf8_unicode_ci NOT NULL,
+  `no_telp` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `foto_ktp` varchar(110) COLLATE utf8_unicode_ci NOT NULL,
+  `total` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `dp` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `transaksi_penjualan`
+--
+
+INSERT INTO `transaksi_penjualan` (`nomor_faktur`, `id_jenis_pembayaran`, `nama_pembeli`, `alamat_pembeli`, `no_telp`, `foto_ktp`, `total`, `tanggal`, `dp`) VALUES
+('PJ1628606521', 1, 'Nofita', 'Banyuwangi', '085765689987', 'PJ1628606521.JPG', 2000000, '2021-08-10', 0),
+('PJ1628606589', 2, 'Riski', 'Purwoharjo', '08123456890', 'PJ1628606589.JPG', 2100000, '2021-08-10', 400000),
+('PJ1628606771', 3, 'Samsudin', 'Bondowoso', '087654321098', 'PJ1628606771.JPG', 7100000, '2021-08-10', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`) VALUES
+(1, 'admin', 'admin');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `angsuran`
+--
+ALTER TABLE `angsuran`
+  ADD KEY `nomor_faktur` (`nomor_faktur`);
+
+--
+-- Indeks untuk tabel `barang`
+--
+ALTER TABLE `barang`
+  ADD PRIMARY KEY (`barang_kode`);
+
+--
+-- Indeks untuk tabel `detail_penjualan`
+--
+ALTER TABLE `detail_penjualan`
+  ADD PRIMARY KEY (`id_detail_penjualan`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `detail_penjualan`
+--
+ALTER TABLE `detail_penjualan`
+  MODIFY `id_detail_penjualan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

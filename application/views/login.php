@@ -1,12 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="id-ID">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>UD. MEBEL ANUGERAH JAYA</title>
-        <link rel="shortcut icon" type="image/png" href="<?php echo base_url("assets/images/Satu.png");?>"/>
+        <link rel="shortcut icon" type="image/png" href="<?php echo base_url("assets/images/Satu.png"); ?>"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url("assets/login/login.css"); ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url("assets/login/sweetalert2.min.css"); ?>" />
 		<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
@@ -22,6 +22,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="login-content">
 			<form id="test-form" class="limiter" action="<?php echo base_url('Login/aksi_login'); ?>" method="post">
 				<img src="<?php echo base_url("assets/login/avatar.svg"); ?>">
+				
+				<?php 
+					if (isset($_SESSION['msg'])) {
+						echo "<div class='alert alert-" . $_SESSION['msg'][0] . "'>" . "<b>" . strtoupper($_SESSION['msg'][0]) . " </b>" . $_SESSION['msg'][1] . "</div>";
+						unset($_SESSION['msg']);
+					}
+				?>
+
 				<h3 class="title">Welcome To ANJAYA MEBEL</h3>
            		<div class="input-div one">
            		   <div class="i">
@@ -62,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$(".btn-success").html(btn);
 					if(dt.success == true){
 						swal.fire("Berhasil!","selamat datang kembali "+dt.name,"success").then(function(){
-							window.location.href = "<?=site_url("admin");?>";
+							window.location.href = "<?= site_url("admin"); ?>";
 						});
 					}else{
 						swal.fire("Gagal!","gagal masuk, cek kembali username & password anda","warning");
