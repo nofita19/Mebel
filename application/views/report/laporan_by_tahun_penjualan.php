@@ -119,7 +119,7 @@
                             <?php 
                             $d = 0;
                             if ($row->id_jenis_pembayaran == '1') { ?>
-                                <?php echo $ini_sub_total += $row->sub_total ?>
+                                <?php echo $row->sub_total ?>
                             <?php } elseif ($row->id_jenis_pembayaran == '2') { 
                                 if ($row->dp == 0) {
                                     echo "0";
