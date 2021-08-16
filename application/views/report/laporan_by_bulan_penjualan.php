@@ -125,7 +125,7 @@
             <th>Jumlah Bayar</th>
         </tr>
         <?php
-        $ini_dp = 0;
+        // $ini_dp = 0;
         $ini_sub_total = 0;
         foreach ($bybulan as $row) {
         ?>
@@ -146,7 +146,7 @@
                         <span>Kredit Musiman</span>
                     <?php } ?></td>
                 <td class="text-center"><?= $row->harga; ?></td>
-                <td class="text-center"><?= $ini_dp += $row->dp; ?></td>
+                <td class="text-center"><?= $row->dp; ?></td>
                 <td class="text-center"> <?php if ($row->id_jenis_pembayaran == '1') { ?>
                         <span>Lunas</span>
                     <?php } elseif ($row->id_jenis_pembayaran == '2') { ?>
@@ -253,11 +253,14 @@
                                             }
                                      }else{
                                         $hasilkal = 0;
+                                        $ra=0;
                                         $h = 0;
                                      }
                                      $h = $this->db->query("SELECT SUM(bayar) as ang FROM angsuran")->result_array();
-                                        // $hasilkal = $this->db->query("SELECT *,SUM(sub_total) as gaes FROM detail_penjualan WHERE nomor_faktur='$row->nomor_faktur'")->result_array();
-                                        echo $ini_dp + $hasilkal[0]['gaes'] + $h[0]['ang'];
+                                        $ra = $this->db->query("SELECT SUM(dp) as dp FROM transaksi_penjualan")->result_array();
+                                        // var_dump($ra);
+                                        // die;
+                                        echo $ra[0]['dp'] + $hasilkal[0]['gaes'] + $h[0]['ang'];;
                                     ?>
                                     
                     </strong></td>
