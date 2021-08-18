@@ -182,6 +182,11 @@ class Penjualan extends CI_Controller {
 	}
 
     public function delete($nomor_faktur){
+		error_reporting(0);
+		$cek =$this->db->query("SELECT * FROM angsuran WHERE nomor_faktur='$nomor_faktur'");
+		if ($cek > 0) {
+			$this->db->query("DELETE FROM angsuran WHERE nomor_faktur='$nomor_faktur'");
+		}
         $nomor_faktur = array('nomor_faktur' => $nomor_faktur);
         $this->load->model('v');
         $this->v->Delete('transaksi_penjualan', $nomor_faktur);

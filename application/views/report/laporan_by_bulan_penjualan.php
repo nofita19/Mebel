@@ -244,22 +244,24 @@
                                      if (!empty($row->id_jenis_pembayaran)) {
                                         if ($row->id_jenis_pembayaran == '1') { ?>
                                             <?php
-                                                $hasilkal = $this->db->query("SELECT SUM(total) as gaes FROM transaksi_penjualan WHERE id_jenis_pembayaran='1'")->result_array();
-                                                $m += $hasilkal[0]['gaes'];
+                                                $hasilkal = $this->db->query("SELECT tanggal,SUM(total) as gaes FROM transaksi_penjualan WHERE MONTH(tanggal) BETWEEN '$bulanawal' AND '$bulanakhir' AND id_jenis_pembayaran='1'")->result_array();
+                                                
                                             ?>
                                             <?php } elseif ($row->id_jenis_pembayaran == '2' || $row->id_jenis_pembayaran == '3') { 
                                                 $h = $this->db->query("SELECT SUM(bayar) as ang FROM angsuran")->result_array();
-                                                print_r($h);
+                                                //print_r($h);
                                             }
                                      }else{
                                         $hasilkal = 0;
                                         $ra=0;
                                         $h = 0;
                                      }
-                                     $h = $this->db->query("SELECT SUM(bayar) as ang FROM angsuran")->result_array();
-                                        $ra = $this->db->query("SELECT SUM(dp) as dp FROM transaksi_penjualan")->result_array();
+                                     $h = $this->db->query("SELECT SUM(bayar) as ang FROM angsuran WHERE MONTH(tanggal) BETWEEN '$bulanawal' AND '$bulanakhir'")->result_array();
+                                        $ra = $this->db->query("SELECT SUM(dp) as dp FROM transaksi_penjualan WHERE MONTH(tanggal) BETWEEN '$bulanawal' AND '$bulanakhir'")->result_array();
                                         // var_dump($ra);
-                                        // die;
+                                        // die; ini saya gak pernah ngasikka kayak gni soanya
+                                        $hasilkal = $this->db->query("SELECT tanggal,SUM(total) as gaes FROM transaksi_penjualan WHERE MONTH(tanggal) BETWEEN '$bulanawal' AND '$bulanakhir' AND id_jenis_pembayaran='1'")->result_array();
+
                                         echo $ra[0]['dp'] + $hasilkal[0]['gaes'] + $h[0]['ang'];;
                                     ?>
                                     

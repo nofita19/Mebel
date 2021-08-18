@@ -198,7 +198,7 @@
                                             ?>
                                             <?php } elseif ($row->id_jenis_pembayaran == '2' || $row->id_jenis_pembayaran == '3') { 
                                                 $h = $this->db->query("SELECT SUM(bayar) as ang FROM angsuran")->result_array();
-                                                print_r($h);
+                                                // print_r($h);
                                             }
                                      }else{
                                         $hasilkal = 0;
@@ -208,6 +208,7 @@
                                      $h = $this->db->query("SELECT SUM(bayar) as ang FROM angsuran")->result_array();
                                      $ra = $this->db->query("SELECT SUM(dp) as dp FROM transaksi_penjualan")->result_array();
                                         // $hasilkal = $this->db->query("SELECT *,SUM(sub_total) as gaes FROM detail_penjualan WHERE nomor_faktur='$row->nomor_faktur'")->result_array();
+                                        $hasilkal = $this->db->query("SELECT tanggal, SUM(total) as gaes FROM transaksi_penjualan WHERE id_jenis_pembayaran='1' AND YEAR(tanggal) ='$tahun'")->result_array();
                                         echo $ra[0]['dp'] + $hasilkal[0]['gaes'] + $h[0]['ang'];
                                     ?>
                                     
