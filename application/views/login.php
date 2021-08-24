@@ -50,6 +50,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
             	   </div>
             	</div>
             	<input type="submit" class="btn" id="tombol" value="Login">
+				<h3>Akun Untuk Testing</h3>
+				<p>Username : admin <br>
+					Password : admin 
+				</p>
             </form>
         </div>
     </div>

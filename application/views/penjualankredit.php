@@ -8,7 +8,7 @@
 <div class="card-body">
 <form action="<?= base_url('penjualan/proses_tambahkredit') ?>" id="form-tambah" method="POST" enctype="multipart/form-data">
 <div class="form-row">
-<div class="form-group col-2">
+<div class="form-group col-2 mr-3">
 <label>No. Penjualan</label>
 <input type="text" name="nomor_faktur" value="PJ<?= time() ?>" readonly class="form-control">
 </div>
@@ -41,7 +41,7 @@
 <input type="hidden" name="barang_kode" value="" readonly class="form-control">
 <div class="form-group col-3">
 <label for="id_jenis_pembayaran">Pembayaran</label>
-<select name="id_jenis_pembayaran" id="id_jenis_pembayaran" class="form-control">
+<select name="id_jenis_pembayaran" id="id_jenis_pembayaran" class="form-control mt-4">
 <option value="">Pilih Pembayaran</option>
 <option value='2'>Kredit Bulanan</option>
 <option value='3'>Kredit Musiman</option>
@@ -56,11 +56,11 @@
 			<input type="number" name="lama_angsuran" value="" readonly class="form-control">
 		</div>
 		<input type="hidden" name="harga" id="harga" value="" readonly class="form-control">
-		<div class="form-group col-2">
+		<div class="form-group col-2 mt-4">
 			<label>Harga </label>
 			<input type="number" id="harga2" name="harga2" value="" readonly class="form-control">
 		</div>
-		<div class="form-group col-2">
+		<div class="form-group col-2 mt-4">
 			<label>Jumlah</label>
 			<input type="number" id="jumlah" name="jumlah" value="" class="form-control" readonly min='1'>
 		</div>
@@ -68,7 +68,7 @@
 			<label>Sub Total</label>
 			<input type="number" id="sub_total" name="sub_total" value="" class="form-control" readonly>
 		</div>
-		<div class="form-group col-1">
+		<div class="form-group col-3 mt-4">
 			<label for="">&nbsp;</label>
 			<button disabled type="button" class="btn btn-primary btn-block" id="tambah"><i class="fa fa-plus"></i></button>
 		</div>
@@ -76,7 +76,7 @@
 	<div class="keranjangkredit">
 		<h5>Detail Penjualan</h5>
 		<hr>
-		<table class="table table-bordered" id="keranjangkredit">
+		<table class="table table-bordered table-responsive" id="keranjangkredit">
 			<thead>
 				<tr>
 					<td width="20%">Nama Barang</td>
@@ -92,7 +92,7 @@
 			</tbody>
 		</table>
 	</div>
-	<table class="table table-bordered" id="bayarkredit">
+	<table class="table table-bordered table-responsive" id="bayarkredit">
 		<thead>
 			<tr>
 				<td width="30%">Nama Pembeli</td>

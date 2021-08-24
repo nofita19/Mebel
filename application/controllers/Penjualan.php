@@ -261,13 +261,13 @@ class Penjualan extends CI_Controller {
 	{
 		$data = $this->db->query("SELECT * FROM angsuran JOIN transaksi_penjualan ON transaksi_penjualan.nomor_faktur = angsuran.nomor_faktur WHERE angsuran.kode_angsuran='$kode_angsuran'")->result_array();
 		$m = $this->db->query("SELECT * FROM angsuran JOIN transaksi_penjualan ON transaksi_penjualan.nomor_faktur = angsuran.nomor_faktur WHERE angsuran.kode_angsuran='$kode_angsuran'")->result_array();
-		$this->load->view("Report/bukti_pembayaran", ['data' => $data, 'data_angsuran' => $m]);
+		$this->load->view("report/bukti_pembayaran", ['data' => $data, 'data_angsuran' => $m]);
 	}
 
 	public function CetakCash($kode_angsuran)
 	{
 		$data = $this->db->query("SELECT * FROM transaksi_penjualan WHERE nomor_faktur='$kode_angsuran'")->result_array();
-		$this->load->view("Report/bukti_pembayaran_Cash", ['data' => $data]);
+		$this->load->view("report/bukti_pembayaran_Cash", ['data' => $data]);
 	}
 	
 }

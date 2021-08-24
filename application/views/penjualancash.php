@@ -8,7 +8,7 @@
 	<div class="card-body">
 	<form action="<?= base_url('penjualan/proses_tambahcash') ?>" id="form-tambah" method="POST" enctype='multipart/form-data'>
 									<div class="form-row">
-										<div class="form-group col-2">
+										<div class="form-group col-2 mr-3">
 											<label>No. Penjualan</label>
 											<input type="text" name="nomor_faktur" value="PJ<?= time() ?>" readonly class="form-control">
 										</div>
@@ -30,7 +30,7 @@
 											</select>
 										</div>
 											<input type="hidden" name="barang_nama" value="" readonly class="form-control">
-										<div class="form-group col-2">
+										<div class="form-group col-2 mr-3">
 											<label>Jenis Barang</label>
 											<input type="text" name="jenis_bahan" value="" readonly class="form-control">
 										</div>
@@ -40,25 +40,25 @@
 										</div>
 										<div class="form-group col-2">
 											<label>Harga </label>
-											<input type="number" id="harga" name="harga" value="" readonly class="form-control">
+											<input type="number" id="harga" name="harga" value="" readonly class="form-control mt-4">
 										</div>
 										<div class="form-group col-2">
 											<label>Jumlah</label>
-											<input type="number" id="jumlah" name="jumlah" value="" class="form-control" readonly min='1'>
+											<input type="number" id="jumlah" name="jumlah" value="" class="form-control mt-4" readonly min='1'>
 										</div>
 										<div class="form-group col-2">
 											<label>Sub Total</label>
 											<input type="number" id="sub_total" name="sub_total" value="" class="form-control" readonly>
 										</div>
-										<div class="form-group col-1">
+										<div class="form-group col-3">
 											<label for="">&nbsp;</label>
-											<button disabled type="button" class="btn btn-primary btn-block" id="tambah"><i class="fa fa-plus"></i></button>
+											<button disabled type="button" class="btn btn-primary btn-block ml-2 mt-4" id="tambah"><i class="fa fa-plus"></i></button>
 										</div>
 									</div>
 									<div class="keranjang">
 										<h5>Detail Penjualan</h5>
 										<hr>
-										<table class="table table-bordered" id="keranjang">
+										<table class="table table-bordered table-responsive" id="keranjang">
 											<thead>
 												<tr>
 													<td width="20%">Nama Barang</td>
@@ -80,7 +80,7 @@
 											</tfoot>
 										</table>
 									</div>
-									<table class="table table-bordered" id="bayar">
+									<table class="table table-bordered table-responsive" id="bayar">
 											<thead>
 												<tr>
 													<td width="30%">Nama Pembeli</td>

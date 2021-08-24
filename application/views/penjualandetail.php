@@ -11,7 +11,7 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-6">
-							<table class="table table-borderless">
+							<table class="table table-borderless table-responsive">
 							<tr>
 									<td><strong>No Penjualan</strong></td>
 									<td>:</td>
@@ -72,7 +72,7 @@
 					<hr>
 					<div class="row">
 						<div class="col-md-12">
-							<table class="table table-bordered">
+							<table class="table table-bordered table-responsive">
 								<thead>
 									<?php
 									if ($penjualan->id_jenis_pembayaran == 1) { ?>
